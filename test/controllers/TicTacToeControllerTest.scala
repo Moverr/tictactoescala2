@@ -8,12 +8,12 @@ import play.api.test.Helpers._
 
 
 
-class TictacTest extends PlaySpec  with GuiceOneAppPerTest with Injecting {
+class TicTacToeControllerTest extends PlaySpec  with GuiceOneAppPerTest with Injecting {
 
 
 
    "render the index page from a new instance of controller" in {
-     val controller = new Tictac(stubControllerComponents())
+     val controller = new TicTacToeController(stubControllerComponents())
      val tic = controller.index().apply(FakeRequest(GET, "/"))
 
      status(tic) mustBe OK

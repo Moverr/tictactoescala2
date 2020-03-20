@@ -12,7 +12,7 @@ case class Resident(name: String, age: Int, role: Option[String])
 case class Place(name: String, location: Location, residents: Seq[Resident])
 
 
-class Tictac  @Inject()(cc:ControllerComponents) extends  AbstractController(cc){
+class TicTacToeController  @Inject()(cc:ControllerComponents) extends  AbstractController(cc){
 
 
   def getEmployee(): JsValue ={
