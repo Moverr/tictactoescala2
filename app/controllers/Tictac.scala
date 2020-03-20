@@ -5,6 +5,7 @@ import javax.inject.Inject
 import play.api.libs.json._
 import play.api.mvc._
 
+
 class Employee( var firstName:String,  var lastName:String);
 case class Location(lat: Double, long: Double)
 case class Resident(name: String, age: Int, role: Option[String])
