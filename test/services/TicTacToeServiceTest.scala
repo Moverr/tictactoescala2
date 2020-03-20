@@ -1,23 +1,15 @@
 package services
 
-import org.scalatest.{BeforeAndAfterEach, FunSuite}
+import org.scalatestplus.play._
+import org.scalatestplus.play.guice._
+import play.api.test._
+import play.api.test.Helpers._
 
-class TicTacToeServiceTest extends FunSuite with BeforeAndAfterEach {
 
-  override def beforeEach() {
+class TicTacToeServiceTest extends PlaySpec  with GuiceOneAppPerTest with Injecting {
 
-  }
+ "Testing the InitGame" in {
 
-  override def afterEach() {
-
-  }
-
-  test("testBoard") {
-
-  }
-
-  test("testInitGame") {
-
-  }
+ }
 
 }
