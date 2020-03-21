@@ -30,11 +30,8 @@ class TicTacToeController  @Inject()(cc:ControllerComponents) extends  AbstractC
 
   def index =Action{
 
-
-
     val empl = getEmployee()
-
-    implicit request: Request[AnyContent] =>
+   implicit request: Request[AnyContent] =>
 //          Ok(views.html.tic())
       Ok((empl));
 
