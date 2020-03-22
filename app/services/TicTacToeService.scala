@@ -56,10 +56,20 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     if(moves.isEmpty()){
       return null
     }
-    var movesArray:Array[String] = moves.split("");
+    var movesArray:Array[String] = moves.split("")
+   // var board:List[String] = {}[String]
+    var board:Array[String] = new Array[String](9);
 
+    var boardIndex:Int = 0;
     for(i<-0 until(3,1)){
         var boardRow:Array[String]= new Array[String](3);
+        for(j<-0 until(3,1)){
+          //if(movesArray())
+          boardIndex += 1
+        }
+
+
+
     }
 
     return null
