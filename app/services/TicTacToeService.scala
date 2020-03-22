@@ -58,6 +58,10 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     }
     var movesArray:Array[String] = moves.split("");
 
+    for(i<-0 until(3,1)){
+        var boardRow:Array[String]= new Array[String](3);
+    }
+
     return null
   }
 
