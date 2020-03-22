@@ -7,7 +7,7 @@ import play.api.libs.json.{JsValue, Json}
 
 trait ITicTacToeService{
   def initGame(): JsValue
-  def populateBoard( moves:String): Array[String]
+  def populateBoard( moves:String): Array[Array[String]]
   def playGame(boardString:String): Array[String]
   def findHorizontalMatch(board:Array[String]):Unit
   def rotateThroughBoardColumns(board:Array[String],columnIndex:Int,unMatched:Int):Unit
@@ -58,13 +58,14 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
   }
 
   //populate Board
-  override def populateBoard(moves: String): Array[String] = {
+  override def populateBoard(moves: String): Array[Array[String]] = {
     if(moves.isEmpty()){
       return null
     }
     var movesArray:Array[String] = moves.split("")
-   // var board:List[String] = {}[String]
-    val board:Array[Any] = new Array[Any](3);
+    // var board:List[String] = {}[String]
+    //var board:Array[String] = new Array[String](3);
+    val board: Array[Array[String]] = new Array[Array[String]](3);
 
     var boardIndex:Int = 0;
     for(i<-0 until(3,1)){
@@ -81,7 +82,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
       board(i) = boardRow;
      }
 
-    return null
+    return board
   }
 
   override def playGame(boardString: String): Array[String] = ???
