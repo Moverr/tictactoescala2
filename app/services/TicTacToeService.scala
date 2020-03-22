@@ -64,22 +64,22 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     }
     var movesArray:Array[String] = moves.split("")
    // var board:List[String] = {}[String]
-    var board:Array[String] = new Array[String](3);
+    val board:Array[Any] = new Array[Any](3);
 
     var boardIndex:Int = 0;
     for(i<-0 until(3,1)){
         var boardRow:Array[String]= new Array[String](3);
         for(j<-0 until(3,1)){
-          if(movesArray(boardIndex) == player1)
-          //if(movesArray())
+          if(movesArray(boardIndex) == player1 || movesArray(boardIndex) == player2){
+              boardRow(j) = movesArray(boardIndex);
+          }else{
+             boardRow(j) = initSymbol;
+          }
           boardIndex += 1
         }
       //adding this to to the board
-      board = board:+boardRow
-
-
-
-    }
+      board(i) = boardRow;
+     }
 
     return null
   }
