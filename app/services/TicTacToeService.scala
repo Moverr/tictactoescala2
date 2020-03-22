@@ -44,8 +44,14 @@ trait ITicTacToeService{
 class TicTacToeService(val board: String) extends ITicTacToeService {
   val boardString :String = board;
 
+  var player1 = "o";
+  var player2 = "x";
+  var initSymbol = " ";
+  var draw = 0;
 
-    @Override def initGame(): JsValue = {
+
+
+  @Override def initGame(): JsValue = {
      val  boardJson = Json.toJson(this.boardString)
    //  val result = playGame(this.boardString)
       return boardJson
@@ -58,15 +64,18 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     }
     var movesArray:Array[String] = moves.split("")
    // var board:List[String] = {}[String]
-    var board:Array[String] = new Array[String](9);
+    var board:Array[String] = new Array[String](3);
 
     var boardIndex:Int = 0;
     for(i<-0 until(3,1)){
         var boardRow:Array[String]= new Array[String](3);
         for(j<-0 until(3,1)){
+          if(movesArray(boardIndex) == player1)
           //if(movesArray())
           boardIndex += 1
         }
+      //adding this to to the board
+      board = board:+boardRow
 
 
 
