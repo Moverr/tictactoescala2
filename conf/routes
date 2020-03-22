@@ -6,8 +6,8 @@
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index
 
-GET    /tictactoe/                  controllers.TicTacToeController.index
-POST    /tictactoe/                  controllers.TicTacToeController.postExample
+GET    /tictactoe/                  controllers.TicTacToeController.index(board:String)
+POST   /tictactoe/                  controllers.TicTacToeController.postExample
 
 
 # Map static resources from the /public folder to the /assets URL path

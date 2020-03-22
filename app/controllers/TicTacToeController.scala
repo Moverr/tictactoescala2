@@ -28,7 +28,7 @@ class TicTacToeController  @Inject()(cc:ControllerComponents) extends  AbstractC
     return Json.toJson(empl);
   }
 
-  def index =Action{
+  def index(board:String ) =Action{
 
     val empl = getEmployee()
    implicit request: Request[AnyContent] =>
