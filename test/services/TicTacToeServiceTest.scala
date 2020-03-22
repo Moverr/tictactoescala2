@@ -17,7 +17,13 @@ class TicTacToeServiceTest extends PlaySpec  with GuiceOneAppPerTest with Inject
    var expectedResult = Json.toJson(board)
    response mustEqual expectedResult
 
-
  }
 
+  "Testing populating board with empty string " in {
+    var board:String = "";
+    var service:TicTacToeService =   new TicTacToeService(board)
+    var response = service.populateBoard(board)
+    response mustEqual null
+
+  }
 }

@@ -14,7 +14,8 @@ class TicTacToeControllerTest extends PlaySpec  with GuiceOneAppPerTest with Inj
 
    "render the index page from a new instance of controller" in {
      val controller = new TicTacToeController(stubControllerComponents())
-     val tic = controller.index().apply(FakeRequest(GET, "/"))
+     val board:String = "+++";
+     val tic = controller.index(board).apply(FakeRequest(GET, "/"))
 
      status(tic) mustBe OK
      contentType(tic) mustBe Some("application/json")
