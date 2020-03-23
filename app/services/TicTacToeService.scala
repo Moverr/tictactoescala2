@@ -18,7 +18,7 @@ trait ITicTacToeService{
   def validateBoardString(board:String):Array[String]
   //todo: THis function has a board array and a callback
   def placeHorizontalWin(board:Array[Array[String]]  ):Any
-  def placeVerticalWin(board:Array[Array[String]],columnIndex:Int,unMatched:Int,callBack:(Boolean,Array[String]) );
+  def placeVerticalWin(board:Array[Array[String]],columnIndex:Int,unMatched:Int ):Any;
   def playLeftRightDiagonalWin(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
   def playRightLeftDiagonalWin(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
   def placeHorizontalBlock(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
@@ -112,6 +112,9 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
       var resultObject:Array[Any]  = placeHorizontalWin(board).asInstanceOf[Array[Any]]
       board =  resultObject(1).asInstanceOf[Array[Array[String]]]
       if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
+      placeVerticalWin(board,0,0);
+
+
     }
 
 
@@ -261,7 +264,53 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     result
    }
 
-  override def placeVerticalWin(board: Array[Array[String]], columnIndex: Int, unMatched: Int, callBack: (Boolean, Array[String])): Unit = ???
+  override def placeVerticalWin(board: Array[Array[String]], columnIndex: Int, unMatched: Int): Any ={
+
+    val result:Array[Any] = null
+
+    var move_o = 0
+    var move_x = 0
+    var un_matched = unMatched
+    var boardRow:Array[String] = new Array[String](3)
+    var i = 0
+    while (  i < board.length ) {
+      boardRow = board(i)
+      if (boardRow(columnIndex) == player1) move_o += 1
+      else if (boardRow(columnIndex) == player2) move_x += 1
+      else if (boardRow(columnIndex) == initSymbol) un_matched += 1
+
+      i += 1
+    }
+
+
+    if ((move_o == 2) && (move_x == 0) && (un_matched == 1)) {
+      var j = 0
+      while ( {
+        j < boardRow.length
+      }) {
+        if (boardRow(columnIndex) == initSymbol) {
+          boardRow(columnIndex) = player1
+
+          result(0) = true
+          result(1) = board
+          return result
+
+        }
+
+        j += 1
+      }
+    }
+
+    if (columnIndex < 3) {
+      val column_Index = columnIndex + 1
+      return placeVerticalWin(board, column_Index, un_matched)
+    }
+
+    result(0) = true
+    result(1) = board
+
+    result
+  }
 
   override def playLeftRightDiagonalWin(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
 
