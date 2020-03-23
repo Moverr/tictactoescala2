@@ -9,7 +9,7 @@ trait ITicTacToeService{
   def initGame(): JsValue
   def populateBoard( moves:String): Array[Array[String]]
   def playGame(boardString:String):  Array[Array[String]]
-  def findHorizontalMatch(board:Array[Array[String]]):Unit
+  def findHorizontalMatch(board:Array[Array[String]]):Any
   def rotateThroughBoardColumns(board:Array[Array[String]],columnIndex:Int,unMatched:Int):Unit
   def findVerticalMatch(board:Array[Array[String]]):Unit
   def findIfExistsUnmatched(board:Array[Array[String]]):Boolean
@@ -91,15 +91,29 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     validateBoardString(boardString);
     board = populateBoard(boardString)
 
-    var result = null
+    var result:Any = null
     {
       result = findHorizontalMatch(board)
+      if(result.equals(player1) || result.equals(player2)){
+          return board;
+      }
+
+      result = findVerticalMatch(board)
+
+      if(result.equals(player1) || result.equals(player2)){
+        return board;
+      }
+
+
+
+
     }
+
 
     result
   }
 
-  override def findHorizontalMatch(board: Array[Array[String]]): Unit = {
+  override def findHorizontalMatch(board: Array[Array[String]]): Any = {
 
     var unMatched:Int = 0
     for(i<-0 until(board.length,1)){
@@ -131,15 +145,6 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   }
 
-  override def rotateThroughBoardColumns(board: Array[String], columnIndex: Int, unMatched: Int): Unit = ???
-
-  override def findVerticalMatch(board: Array[String]): Unit = ???
-
-  override def findIfExistsUnmatched(board: Array[String]): Boolean = ???
-
-  override def findLeftRightDiagonalMatch(board: Array[String]): Any = ???
-
-  override def findRightLeftDiagonalMatch(board: Array[String]): Any = ???
 
   override def validateBoardString(board:String ):Array[String] = {
     if(board.isEmpty()) {
@@ -159,29 +164,40 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
       boardArray
   }
 
-  override def placeHorizontalWin(board: Array[String], callBack: (Boolean, Array[String])): Unit = ???
 
-  override def placeVerticalWin(board: Array[String], columnIndex: Int, unMatched: Int, callBack: (Boolean, Array[String])): Unit = ???
+  override def rotateThroughBoardColumns(board: Array[Array[String]], columnIndex: Int, unMatched: Int): Unit = ???
 
-  override def playLeftRightDiagonalWin(board: Array[String], callBack: (Boolean, Array[String])): Unit = ???
+  override def findVerticalMatch(board: Array[Array[String]]): Unit = ???
 
-  override def playRightLeftDiagonalWin(board: Array[String], callBack: (Boolean, Array[String])): Unit = ???
+  override def findIfExistsUnmatched(board: Array[Array[String]]): Boolean = ???
 
-  override def placeHorizontalBlock(board: Array[String], callBack: (Boolean, Array[String])): Unit = ???
+  override def findLeftRightDiagonalMatch(board: Array[Array[String]]): Any = ???
 
-  override def placeVerticalBlock(board: Array[String], columnIndex: Int, unMatched: Int, callBack: (Boolean, Array[String])): Unit = ???
+  override def findRightLeftDiagonalMatch(board: Array[Array[String]]): Any = ???
 
-  override def playLeftRightDiagonalBlock(board: Array[String], callBack: (Boolean, Array[String])): Unit = ???
+  override def placeHorizontalWin(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
 
-  override def playRightLeftDiagonalBlock(board: Array[String], callBack: (Boolean, Array[String])): Unit = ???
+  override def placeVerticalWin(board: Array[Array[String]], columnIndex: Int, unMatched: Int, callBack: (Boolean, Array[String])): Unit = ???
 
-  override def playHorizontalMove(board: Array[String], callBack: (Boolean, Array[String])): Unit = ???
+  override def playLeftRightDiagonalWin(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
 
-  override def playVerticalMove(board: Array[String], columnIndex: Int, unMatched: Int, callBack: (Boolean, Array[String])): Unit = ???
+  override def playRightLeftDiagonalWin(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
 
-  override def playLeftRightDiagonalMove(board: Array[String], callBack: (Boolean, Array[String])): Unit = ???
+  override def placeHorizontalBlock(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
 
-  override def playRightLeftDiagonalMove(board: Array[String], callBack: (Boolean, Array[String])): Unit = ???
+  override def placeVerticalBlock(board: Array[Array[String]], columnIndex: Int, unMatched: Int, callBack: (Boolean, Array[String])): Unit = ???
+
+  override def playLeftRightDiagonalBlock(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
+
+  override def playRightLeftDiagonalBlock(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
+
+  override def playHorizontalMove(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
+
+  override def playVerticalMove(board: Array[Array[String]], columnIndex: Int, unMatched: Int, callBack: (Boolean, Array[String])): Unit = ???
+
+  override def playLeftRightDiagonalMove(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
+
+  override def playRightLeftDiagonalMove(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
 
   override def shuffle(board: Array[String]): Array[String] = ???
 
