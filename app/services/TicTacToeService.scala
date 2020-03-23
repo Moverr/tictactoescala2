@@ -17,7 +17,7 @@ trait ITicTacToeService{
   def findRightLeftDiagonalMatch(board:Array[Array[String]]):Any
   def validateBoardString(board:String):Array[String]
   //todo: THis function has a board array and a callback
-  def placeHorizontalWin(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
+  def placeHorizontalWin(board:Array[Array[String]]  ):Array[Any]
   def placeVerticalWin(board:Array[Array[String]],columnIndex:Int,unMatched:Int,callBack:(Boolean,Array[String]) );
   def playLeftRightDiagonalWin(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
   def playRightLeftDiagonalWin(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
@@ -215,8 +215,9 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   override def findRightLeftDiagonalMatch(board: Array[Array[String]]): Any = ???
 
-  override def placeHorizontalWin(board: Array[Array[String]]   ):Any={
+  override def placeHorizontalWin(board: Array[Array[String]]   ):Array[Any]={
 
+    var result:Array[Any] = null
     var boardRow:Array[String] = null
     //todo: look through the vertical selection to find if there are existing 3 items of same type, x or o
 
@@ -236,12 +237,16 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
         j += 1
       }
-      if ((move_o eq 2) && (move_x eq 0) && (unmatched eq 1)) { //todo: place  a move o to the unmatched
+      if ((move_o == 2) && (move_x == 0) && (unmatched == 1)) {
+
         var j = 0
         while (    j < boardRow.length  ) {
           if (boardRow(j) ==  initSymbol) {
             boardRow(j) = player1
-            return callback(true, board)
+            result(0) = true;
+            result(1) = board;
+
+            return result;
           }
 
           j += 1
@@ -252,11 +257,11 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
       i  += 1
     }
 
+    result(0) = false;
+    result(1) = board;
 
-    return callback(false, board)
-
-
-  }
+    result
+   }
 
   override def placeVerticalWin(board: Array[Array[String]], columnIndex: Int, unMatched: Int, callBack: (Boolean, Array[String])): Unit = ???
 
