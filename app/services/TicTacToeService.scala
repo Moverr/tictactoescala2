@@ -9,27 +9,27 @@ trait ITicTacToeService{
   def initGame(): JsValue
   def populateBoard( moves:String): Array[Array[String]]
   def playGame(boardString:String):  Array[Array[String]]
-  def findHorizontalMatch(board:Array[String]):Unit
-  def rotateThroughBoardColumns(board:Array[String],columnIndex:Int,unMatched:Int):Unit
-  def findVerticalMatch(board:Array[String]):Unit
-  def findIfExistsUnmatched(board:Array[String]):Boolean
-  def findLeftRightDiagonalMatch(board:Array[String]):Any
-  def findRightLeftDiagonalMatch(board:Array[String]):Any
+  def findHorizontalMatch(board:Array[Array[String]]):Unit
+  def rotateThroughBoardColumns(board:Array[Array[String]],columnIndex:Int,unMatched:Int):Unit
+  def findVerticalMatch(board:Array[Array[String]]):Unit
+  def findIfExistsUnmatched(board:Array[Array[String]]):Boolean
+  def findLeftRightDiagonalMatch(board:Array[Array[String]]):Any
+  def findRightLeftDiagonalMatch(board:Array[Array[String]]):Any
   def validateBoardString(board:String):Array[String]
   //todo: THis function has a board array and a callback
-  def placeHorizontalWin(board:Array[String], callBack:(Boolean,Array[String]) )
-  def placeVerticalWin(board:Array[String],columnIndex:Int,unMatched:Int,callBack:(Boolean,Array[String]) );
-  def playLeftRightDiagonalWin(board:Array[String], callBack:(Boolean,Array[String]) )
-  def playRightLeftDiagonalWin(board:Array[String], callBack:(Boolean,Array[String]) )
-  def placeHorizontalBlock(board:Array[String], callBack:(Boolean,Array[String]) )
-  def placeVerticalBlock(board:Array[String],columnIndex:Int,unMatched:Int,callBack:(Boolean,Array[String]) )
-  def playLeftRightDiagonalBlock(board:Array[String], callBack:(Boolean,Array[String]) )
-  def playRightLeftDiagonalBlock(board:Array[String], callBack:(Boolean,Array[String]) )
-  def playHorizontalMove(board:Array[String], callBack:(Boolean,Array[String]) )
+  def placeHorizontalWin(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
+  def placeVerticalWin(board:Array[Array[String]],columnIndex:Int,unMatched:Int,callBack:(Boolean,Array[String]) );
+  def playLeftRightDiagonalWin(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
+  def playRightLeftDiagonalWin(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
+  def placeHorizontalBlock(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
+  def placeVerticalBlock(board:Array[Array[String]],columnIndex:Int,unMatched:Int,callBack:(Boolean,Array[String]) )
+  def playLeftRightDiagonalBlock(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
+  def playRightLeftDiagonalBlock(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
+  def playHorizontalMove(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
 
-  def playVerticalMove(board:Array[String],columnIndex:Int,unMatched:Int,callBack:(Boolean,Array[String]) )
-  def playLeftRightDiagonalMove(board:Array[String], callBack:(Boolean,Array[String]) )
-  def playRightLeftDiagonalMove(board:Array[String], callBack:(Boolean,Array[String]) )
+  def playVerticalMove(board:Array[Array[String]],columnIndex:Int,unMatched:Int,callBack:(Boolean,Array[String]) )
+  def playLeftRightDiagonalMove(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
+  def playRightLeftDiagonalMove(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
 
   def shuffle(board:Array[String]):Array[String]
   def playNextMove(board:Array[String]): Array[String]
@@ -99,7 +99,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     result
   }
 
-  override def findHorizontalMatch(board: Array[String]): Unit = {
+  override def findHorizontalMatch(board: Array[Array[String]]): Unit = {
 
     var unMatched:Int = 0
     for(i<-0 until(board.length,1)){
