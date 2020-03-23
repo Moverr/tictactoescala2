@@ -109,10 +109,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
 
     {
-      result  = placeHorizontalWin(board,( status:Boolean,  result:Array[Array[String]])=>{
-      if(status) return status else return result;
-
-      })
+      var resultObject:Array[Any]  = placeHorizontalWin(board)
     }
 
 
