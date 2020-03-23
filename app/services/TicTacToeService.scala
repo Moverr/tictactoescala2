@@ -15,7 +15,7 @@ trait ITicTacToeService{
   def findIfExistsUnmatched(board:Array[String]):Boolean
   def findLeftRightDiagonalMatch(board:Array[String]):Any
   def findRightLeftDiagonalMatch(board:Array[String]):Any
-  def validateBoardString(board:Array[String]):Array[String]
+  def validateBoardString(board:String):Array[String]
   //todo: THis function has a board array and a callback
   def placeHorizontalWin(board:Array[String], callBack:(Boolean,Array[String]) )
   def placeVerticalWin(board:Array[String],columnIndex:Int,unMatched:Int,callBack:(Boolean,Array[String]) );
@@ -78,18 +78,20 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
         }
       board(i) = boardRow;
      }
-
     board
   }
 
   override def playGame(boardString: String):  Array[Array[String]]= {
     var board: Array[Array[String]] = null
     var resultstatus:Boolean = false
+    // 1) if empty string  or undefined meaning, the computer is playing first
     if(boardString.isEmpty()){
       board = populateBoard("++++o++++");
     }
 
-    return null;
+
+    validateBoardString(boardString);
+    board
   }
 
   override def findHorizontalMatch(board: Array[String]): Unit = ???
@@ -104,7 +106,19 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   override def findRightLeftDiagonalMatch(board: Array[String]): Any = ???
 
-  override def validateBoardString(board: Array[String]): Array[String] = ???
+  override def validateBoardString(board:String ):Array[String] = {
+    if(board.isEmpty()) {
+      throw new RuntimeException("")
+    }
+    var boardArray:Array[String] = board.split("")
+    if(boardArray.length <  9 ){
+      throw new RuntimeException("Invalid Board length ")
+    }
+
+    
+
+    return null;
+  }
 
   override def placeHorizontalWin(board: Array[String], callBack: (Boolean, Array[String])): Unit = ???
 
