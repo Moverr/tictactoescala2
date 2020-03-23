@@ -110,6 +110,8 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
     {
       var resultObject:Array[Any]  = placeHorizontalWin(board)
+      board = resultObject(1)
+      if(resultObject(0)== true)   return  board
     }
 
 
@@ -214,9 +216,8 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   override def placeHorizontalWin(board: Array[Array[String]]   ):Array[Any]={
 
-    var result:Array[Any] = null
+    val result:Array[Any] = null
     var boardRow:Array[String] = null
-    //todo: look through the vertical selection to find if there are existing 3 items of same type, x or o
 
     var i:Int = 0;
     while(i < board.length){
