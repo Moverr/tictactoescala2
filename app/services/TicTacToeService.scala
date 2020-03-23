@@ -89,10 +89,35 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
       board = populateBoard("++++o++++");
     }
     validateBoardString(boardString);
-    board
+    board = populateBoard(boardString)
+
+    var result = null
+    {
+      result = findHorizontalMatch(board)
+    }
+
+    result
   }
 
-  override def findHorizontalMatch(board: Array[String]): Unit = ???
+  override def findHorizontalMatch(board: Array[String]): Unit = {
+
+    var unMatched:Int = 0
+    for(i<-0 until(board.length,1)){
+      var boardRow = board(i)
+      var move_o :Int = 0
+      var move_x  :Int = 0
+      for(j<-0 until(board.length,1)){
+         if(boardRow(j).equals(player1)){
+           move_o +=1
+         }
+         else if(boardRow(j).equals(player2)){
+            move_x += 1
+         }
+      }
+    }
+
+    return null;
+  }
 
   override def rotateThroughBoardColumns(board: Array[String], columnIndex: Int, unMatched: Int): Unit = ???
 
