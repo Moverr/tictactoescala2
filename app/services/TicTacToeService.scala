@@ -69,11 +69,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     for(i<-0 until(3,1)){
         var boardRow:Array[String]= new Array[String](3);
         for(j<-0 until(3,1)){
-          if(movesArray(boardIndex) == player1 || movesArray(boardIndex) == player2){
-              boardRow(j) = movesArray(boardIndex);
-          }else{
-             boardRow(j) = initSymbol;
-          }
+          boardRow(j)  =   if(movesArray(boardIndex) == player1 || movesArray(boardIndex) == player2)  movesArray(boardIndex) else initSymbol
           boardIndex += 1
         }
       board(i) = boardRow;
@@ -85,10 +81,8 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     var board: Array[Array[String]] = null
 
     // 1) if empty string  or undefined meaning, the computer is playing first
-
-    validateBoardString(boardString);
-
-    var board =   if (boardString.isEmpty())  populateBoard("++++o++++") else  populateBoard(boardString)
+     validateBoardString(boardString);
+     board =   if (boardString.isEmpty())  populateBoard("++++o++++") else  populateBoard(boardString)
 
     var result:Any = null
     {
@@ -97,22 +91,20 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
           return board;
       }
 
-      result = findVerticalMatch(board)
+      {
+        result = findVerticalMatch(board)
 
-      if(result.equals(player1) || result.equals(player2)) return board
+        if(result.equals(player1) || result.equals(player2)) return board
 
-      result = findLeftRightDiagonalMatch(board)
+        result = findLeftRightDiagonalMatch(board)
 
-      if(result.equals(player1) || result.equals(player2)) return board
+        if(result.equals(player1) || result.equals(player2)) return board
 
-      result = findRightLeftDiagonalMatch(board)
+        result = findRightLeftDiagonalMatch(board)
 
-      8if(result.equals(player1) || result.equals(player2)) return board
+        8if(result.equals(player1) || result.equals(player2)) return board
 
-
-
-
-
+      }
 
 
     }
@@ -145,12 +137,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
     }
 
-    if (unMatched > 0){
-      return board
-    } else{
-      return draw
-    }
-
+    if(unMatched > 0 )   board else   draw
   }
 
 
