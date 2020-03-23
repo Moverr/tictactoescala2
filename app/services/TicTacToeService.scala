@@ -115,8 +115,12 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
       throw new RuntimeException("Invalid Board length ")
     }
 
-    
+    for(index <-0 until(boardArray.length,1)){
+      var character = boardArray(index)
+      if(!character.equalsIgnoreCase(player1) && !character.equalsIgnoreCase(player2)  && !character.equalsIgnoreCase(initSymbol)  ){
 
+      }
+    }
     return null;
   }
 
