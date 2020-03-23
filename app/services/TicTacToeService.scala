@@ -11,7 +11,7 @@ trait ITicTacToeService{
   def playGame(boardString:String):  Array[Array[String]]
   def findHorizontalMatch(board:Array[Array[String]]):Any
   def rotateThroughBoardColumns(board:Array[Array[String]],columnIndex:Int,unMatched:Int):Unit
-  def findVerticalMatch(board:Array[Array[String]]):Unit
+  def findVerticalMatch(board:Array[Array[String]]):Any
   def findIfExistsUnmatched(board:Array[Array[String]]):Boolean
   def findLeftRightDiagonalMatch(board:Array[Array[String]]):Any
   def findRightLeftDiagonalMatch(board:Array[Array[String]]):Any
@@ -167,7 +167,10 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   override def rotateThroughBoardColumns(board: Array[Array[String]], columnIndex: Int, unMatched: Int): Unit = ???
 
-  override def findVerticalMatch(board: Array[Array[String]]): Unit = ???
+  override def findVerticalMatch(board: Array[Array[String]]): Any{
+
+  
+  }
 
   override def findIfExistsUnmatched(board: Array[Array[String]]): Boolean = ???
 
