@@ -85,7 +85,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
      board =   if (boardString.isEmpty())  populateBoard("++++o++++") else  populateBoard(boardString)
 
     var result:Any = null
-    {
+
       result = findHorizontalMatch(board)
       if(result.equals(player1) || result.equals(player2)){
           return board;
@@ -102,15 +102,16 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
         result = findRightLeftDiagonalMatch(board)
 
-        8if(result.equals(player1) || result.equals(player2)) return board
+        if(result.equals(player1) || result.equals(player2)) return board
 
       }
 
 
-    }
 
 
-    result
+
+
+    return null
   }
 
   override def findHorizontalMatch(board: Array[Array[String]]): Any = {
@@ -131,9 +132,9 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
          }
       }
 
-      if (move_o eq 3) return player1
+      if (move_o ==  3) return player1
 
-      if (move_x eq 3) return player2
+      if (move_x == 3) return player2
 
     }
 
@@ -178,13 +179,13 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
     }
 
-    if (move_o eq  3) return player1
+    if (move_o ==  3) return player1
 
-    if (move_x eq  3) return player2
+    if (move_x ==  3) return player2
 
-    if ( (columnIndex eq 3)  &&  un_matched > 0)  return board
+    if ( (columnIndex == 3)  &&  un_matched > 0)  return board
 
-    if (columnIndex eq  3)  return draw
+    if (columnIndex ==  3)  return draw
 
     var  column_index = columnIndex + 1;
 
