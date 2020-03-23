@@ -108,6 +108,14 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
 
 
+    {
+      result  = placeHorizontalWin(board,( status:Boolean,  result:Array[Array[String]])=>{
+      if(status) return status else return result;
+
+      })
+    }
+
+
 
 
 
@@ -207,7 +215,48 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   override def findRightLeftDiagonalMatch(board: Array[Array[String]]): Any = ???
 
-  override def placeHorizontalWin(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
+  override def placeHorizontalWin(board: Array[Array[String]]   ):Any={
+
+    var boardRow:Array[String] = null
+    //todo: look through the vertical selection to find if there are existing 3 items of same type, x or o
+
+    var i:Int = 0;
+    while(i < board.length){
+
+      boardRow = board(i)
+      var move_o = 0
+      var move_x = 0
+      var unmatched = 0
+      var j = 0
+      while ( j < boardRow.length ) {
+
+        if (boardRow(j) eq player1) move_o += 1
+        else if (boardRow(j) eq player2) move_x += 1
+        else unmatched += 1
+
+        j += 1
+      }
+      if ((move_o eq 2) && (move_x eq 0) && (unmatched eq 1)) { //todo: place  a move o to the unmatched
+        var j = 0
+        while (    j < boardRow.length  ) {
+          if (boardRow(j) ==  initSymbol) {
+            boardRow(j) = player1
+            return callback(true, board)
+          }
+
+          j += 1
+        }
+      }
+
+
+      i  += 1
+    }
+
+
+    return callback(false, board)
+
+
+  }
 
   override def placeVerticalWin(board: Array[Array[String]], columnIndex: Int, unMatched: Int, callBack: (Boolean, Array[String])): Unit = ???
 
