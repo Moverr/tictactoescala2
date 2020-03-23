@@ -145,16 +145,14 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     if(board.isEmpty()) {
       return null
     }
-    var boardArray:Array[String] = board.split("")
+    val boardArray:Array[String] = board.split("")
     if(boardArray.length <  9 ){
       throw new RuntimeException("Invalid Board length ")
     }
 
     for(index <-0 until(boardArray.length,1)){
-      var character = boardArray(index)
-      if(!character.equalsIgnoreCase(player1) && !character.equalsIgnoreCase(player2)  && !character.equalsIgnoreCase(initSymbol)  ){
-        throw new RuntimeException("Invalid Character, not acceptable ")
-      }
+      val character = boardArray(index)
+      if(!character.equalsIgnoreCase(player1) && !character.equalsIgnoreCase(player2)  && !character.equalsIgnoreCase(initSymbol)  ) throw new RuntimeException("Invalid Character, not acceptable ")
     }
       boardArray
   }
