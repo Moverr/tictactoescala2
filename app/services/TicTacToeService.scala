@@ -17,7 +17,7 @@ trait ITicTacToeService{
   def findRightLeftDiagonalMatch(board:Array[Array[String]]):Any
   def validateBoardString(board:String):Array[String]
   //todo: THis function has a board array and a callback
-  def placeHorizontalWin(board:Array[Array[String]]  ):Array[Any]
+  def placeHorizontalWin(board:Array[Array[String]]  ):Any
   def placeVerticalWin(board:Array[Array[String]],columnIndex:Int,unMatched:Int,callBack:(Boolean,Array[String]) );
   def playLeftRightDiagonalWin(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
   def playRightLeftDiagonalWin(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
@@ -109,9 +109,9 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
 
     {
-      var resultObject:Array[Any]  = placeHorizontalWin(board)
-      board = resultObject(1)
-      if(resultObject(0)== true)   return  board
+      var resultObject:Array[Any]  = placeHorizontalWin(board).asInstanceOf[Array[Any]]
+      board =  resultObject(1).asInstanceOf[Array[Array[String]]]
+      if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
     }
 
 
@@ -214,7 +214,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   override def findRightLeftDiagonalMatch(board: Array[Array[String]]): Any = ???
 
-  override def placeHorizontalWin(board: Array[Array[String]]   ):Array[Any]={
+  override def placeHorizontalWin(board: Array[Array[String]]   ):Any={
 
     val result:Array[Any] = null
     var boardRow:Array[String] = null
