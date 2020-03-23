@@ -60,7 +60,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
   //populate Board
   override def populateBoard(moves: String): Array[Array[String]] = {
     if(moves.isEmpty()){
-      return null
+       return null
     }
     val movesArray:Array[String] = moves.split("")
     val board: Array[Array[String]] = new Array[Array[String]](3);
@@ -76,11 +76,10 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
           }
           boardIndex += 1
         }
-      //adding this to to the board
       board(i) = boardRow;
      }
 
-    return board
+    board
   }
 
   override def playGame(boardString: String): Array[String] = ???
