@@ -112,7 +112,12 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
       var resultObject:Array[Any]  = placeHorizontalWin(board).asInstanceOf[Array[Any]]
       board =  resultObject(1).asInstanceOf[Array[Array[String]]]
       if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
-      placeVerticalWin(board,0,0);
+
+      resultObject = placeVerticalWin(board,0,0).asInstanceOf[Array[Any]]
+      board =  resultObject(1).asInstanceOf[Array[Array[String]]]
+      if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
+
+
 
 
     }
