@@ -88,8 +88,6 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     if(boardString.isEmpty()){
       board = populateBoard("++++o++++");
     }
-
-
     validateBoardString(boardString);
     board
   }
@@ -121,7 +119,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
         throw new RuntimeException("Invalid Character, not acceptable ")
       }
     }
-      boardArray;
+      boardArray
   }
 
   override def placeHorizontalWin(board: Array[String], callBack: (Boolean, Array[String])): Unit = ???
