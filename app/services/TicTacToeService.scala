@@ -52,7 +52,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
 
   @Override def initGame(): JsValue = {
-     val  boardJson = Json.toJson(this.boardString)
+     val  boardJson = Json.toJson(boardString)
    //  val result = playGame(this.boardString)
       return boardJson
   }

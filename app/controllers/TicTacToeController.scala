@@ -31,13 +31,8 @@ class TicTacToeController  @Inject()(cc:ControllerComponents) extends  AbstractC
   }
 
   def index(board:String ) =Action{
-
-    var result = new TicTacToeService(board).initGame();
-    val empl = getEmployee()
-//   implicit request: Request[AnyContent] =>
-//          Ok(views.html.tic())
-      Ok((result));
-
+    val result = new TicTacToeService(board).initGame();
+    Ok((result));
   }
 
   def postExample =Action{
