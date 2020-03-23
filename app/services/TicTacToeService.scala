@@ -118,10 +118,10 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     for(index <-0 until(boardArray.length,1)){
       var character = boardArray(index)
       if(!character.equalsIgnoreCase(player1) && !character.equalsIgnoreCase(player2)  && !character.equalsIgnoreCase(initSymbol)  ){
-
+        throw new RuntimeException("Invalid Character, not acceptable ")
       }
     }
-    return null;
+    return boardArray;
   }
 
   override def placeHorizontalWin(board: Array[String], callBack: (Boolean, Array[String])): Unit = ???
