@@ -62,9 +62,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     if(moves.isEmpty()){
       return null
     }
-    var movesArray:Array[String] = moves.split("")
-    // var board:List[String] = {}[String]
-    //var board:Array[String] = new Array[String](3);
+    val movesArray:Array[String] = moves.split("")
     val board: Array[Array[String]] = new Array[Array[String]](3);
 
     var boardIndex:Int = 0;
