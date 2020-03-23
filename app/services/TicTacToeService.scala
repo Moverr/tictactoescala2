@@ -167,9 +167,12 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   override def rotateThroughBoardColumns(board: Array[Array[String]], columnIndex: Int, unMatched: Int): Unit = ???
 
-  override def findVerticalMatch(board: Array[Array[String]]): Any{
+  override def findVerticalMatch(board: Array[Array[String]]): Any = {
+    val columnIndex: Int = 0
+    val unmatched: Int = 0
+    val result: Any = rotateThroughBoardColumns(board, columnIndex, unmatched)
+    result
 
-  
   }
 
   override def findIfExistsUnmatched(board: Array[Array[String]]): Boolean = ???
