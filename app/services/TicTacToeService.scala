@@ -98,7 +98,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   override def rotateThroughBoardColumns(board: Array[String], columnIndex: Int, unMatched: Int): Unit = ???
 
-  override def findVerticalMatch(board: Array[String]): Usnit = ???
+  override def findVerticalMatch(board: Array[String]): Unit = ???
 
   override def findIfExistsUnmatched(board: Array[String]): Boolean = ???
 
@@ -121,7 +121,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
         throw new RuntimeException("Invalid Character, not acceptable ")
       }
     }
-    return boardArray;
+      boardArray;
   }
 
   override def placeHorizontalWin(board: Array[String], callBack: (Boolean, Array[String])): Unit = ???

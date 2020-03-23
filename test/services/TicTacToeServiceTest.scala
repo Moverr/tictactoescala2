@@ -66,6 +66,16 @@ class TicTacToeServiceTest extends PlaySpec  with GuiceOneAppPerTest with Inject
   }
 
 
+  "Testing Validate Board String  " in {
+    var board:String = " xxo  o  ";
+    var service:TicTacToeService =   new TicTacToeService(board)
+    var response = service.validateBoardString(board)
+    var expectedResult= board.split("");
+    info("Wanted response ");
+    response mustEqual expectedResult
+  }
+
+
 
 
 }
