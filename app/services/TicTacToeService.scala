@@ -10,7 +10,7 @@ trait ITicTacToeService{
   def populateBoard( moves:String): Array[Array[String]]
   def playGame(boardString:String):  Array[Array[String]]
   def findHorizontalMatch(board:Array[Array[String]]):Any
-  def rotateThroughBoardColumns(board:Array[Array[String]],columnIndex:Int,unMatched:Int):Unit
+  def rotateThroughBoardColumns(board:Array[Array[String]],columnIndex:Int,unMatched:Int):Any
   def findVerticalMatch(board:Array[Array[String]]):Any
   def findIfExistsUnmatched(board:Array[Array[String]]):Boolean
   def findLeftRightDiagonalMatch(board:Array[Array[String]]):Any
@@ -165,7 +165,40 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
   }
 
 
-  override def rotateThroughBoardColumns(board: Array[Array[String]], columnIndex: Int, unMatched: Int): Unit = ???
+  override def rotateThroughBoardColumns(board: Array[Array[String]], columnIndex: Int, unMatched: Int): Any = {
+
+    var move_o: Int = 0
+    var move_x: Int = 0
+    var un_matched:Int = 0;
+
+    for (i <- 0 until(board.length, 1)) {
+      var boardRow = board(i)
+
+      if (boardRow(columnIndex).equals(player1)) {
+        move_o +=1
+      }
+      else if (boardRow(columnIndex).equals(player2) ) {
+        move_x +=1
+      } else if (boardRow(columnIndex).equals(initSymbol)) {
+        un_matched += 1
+      }
+
+
+    }
+
+    if (move_o eq  3) return player1
+
+    if (move_x eq  3) return player2
+
+    if (columnIndex eq 3 && un_matched > 0)  return board
+
+    if (columnIndex eq  3)  return draw
+
+    var  column_index = columnIndex + 1;
+
+    rotateThroughBoardColumns(board, column_index, un_matched);
+
+  }
 
   override def findVerticalMatch(board: Array[Array[String]]): Any = {
     val columnIndex: Int = 0
