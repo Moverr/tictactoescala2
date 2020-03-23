@@ -112,11 +112,23 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
          }
          else if(boardRow(j).equals(player2)){
             move_x += 1
+         }else{
+           unMatched += unMatched;
          }
       }
+
+      if (move_o eq 3) return player1
+
+      if (move_x eq 3) return player2
+
     }
 
-    return null;
+    if (unMatched > 0){
+      return board
+    } else{
+      return draw
+    }
+
   }
 
   override def rotateThroughBoardColumns(board: Array[String], columnIndex: Int, unMatched: Int): Unit = ???
