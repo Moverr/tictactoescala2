@@ -83,13 +83,12 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   override def playGame(boardString: String):  Array[Array[String]]= {
     var board: Array[Array[String]] = null
-    var resultstatus:Boolean = false
+
     // 1) if empty string  or undefined meaning, the computer is playing first
-    if(boardString.isEmpty()){
-      board = populateBoard("++++o++++");
-    }
+
     validateBoardString(boardString);
-    board = populateBoard(boardString)
+
+    var board =   if (boardString.isEmpty())  populateBoard("++++o++++") else  populateBoard(boardString)
 
     var result:Any = null
     {
@@ -100,9 +99,18 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
       result = findVerticalMatch(board)
 
-      if(result.equals(player1) || result.equals(player2)){
-        return board;
-      }
+      if(result.equals(player1) || result.equals(player2)) return board
+
+      result = findLeftRightDiagonalMatch(board)
+
+      if(result.equals(player1) || result.equals(player2)) return board
+
+      result = findRightLeftDiagonalMatch(board)
+
+      8if(result.equals(player1) || result.equals(player2)) return board
+
+
+
 
 
 
@@ -148,7 +156,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   override def validateBoardString(board:String ):Array[String] = {
     if(board.isEmpty()) {
-      throw new RuntimeException("")
+      return null
     }
     var boardArray:Array[String] = board.split("")
     if(boardArray.length <  9 ){
@@ -183,14 +191,13 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
         un_matched += 1
       }
 
-
     }
 
     if (move_o eq  3) return player1
 
     if (move_x eq  3) return player2
 
-    if (columnIndex eq 3 && un_matched > 0)  return board
+    if ( (columnIndex eq 3)  &&  un_matched > 0)  return board
 
     if (columnIndex eq  3)  return draw
 
