@@ -22,7 +22,7 @@ trait ITicTacToeService{
   def playLeftRightDiagonalWin(board:Array[Array[String]]):Any
   def playRightLeftDiagonalWin(board:Array[Array[String]]):Any
   def placeHorizontalBlock(board:Array[Array[String]]):Any
-  def placeVerticalBlock(board:Array[Array[String]],columnIndex:Int,unMatched:Int,callBack:(Boolean,Array[String]) )
+  def placeVerticalBlock(board:Array[Array[String]],columnIndex:Int,unMatched:Int):Any
   def playLeftRightDiagonalBlock(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
   def playRightLeftDiagonalBlock(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
   def playHorizontalMove(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
@@ -107,9 +107,9 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
       }
 
 
-
+    var resultObject:Array[Any] = null;
     {
-      var resultObject:Array[Any]  = placeHorizontalWin(board).asInstanceOf[Array[Any]]
+      resultObject  = placeHorizontalWin(board).asInstanceOf[Array[Any]]
       board =  resultObject(1).asInstanceOf[Array[Array[String]]]
       if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
 
@@ -131,16 +131,16 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
     {
 
-      placeHorizontalBlock(board);
+      resultObject =  placeHorizontalBlock(board).asInstanceOf[Array[Any]]
+      board =  resultObject(1).asInstanceOf[Array[Array[String]]]
+      if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
 
 
 
-      placeVerticalBlock(board, 0, 0, (status, result) => {
-        if (status === true) {
-          resultstatus = true
-          return result;
-        }
-      });
+      resultObject =  placeVerticalBlock(board, 0, 0).asInstanceOf[Array[Any]]
+      board =  resultObject(1).asInstanceOf[Array[Array[String]]]
+      if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
+
 
 
       if(resultstatus === true){
@@ -464,8 +464,6 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   override def placeHorizontalBlock(board: Array[Array[String]]): Any ={
     val result:Array[Any] = null
-
-
     var boardRow:Array[String] = null
     //todo: look through the vertical selection to find if there are existing 3 items of same type, x or o
     var i = 0
@@ -484,9 +482,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
       if ((move_x == 2) && (move_o == 0) && (unmatched == 1)) {
         var j = 0
-        while ( {
-          j < boardRow.length
-        }) {
+        while (  j < boardRow.length) {
           if (boardRow(j) == initSymbol) {
             boardRow(j) = player1
             board(i) = boardRow
@@ -507,7 +503,9 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   }
 
-  override def placeVerticalBlock(board: Array[Array[String]], columnIndex: Int, unMatched: Int, callBack: (Boolean, Array[String])): Unit = ???
+  override def placeVerticalBlock(board: Array[Array[String]], columnIndex: Int, unMatched: Int): Any = {
+
+  }
 
   override def playLeftRightDiagonalBlock(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
 
