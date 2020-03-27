@@ -633,7 +633,6 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   override def playHorizontalMove(board: Array[Array[String]]): Any = {
     val result:Array[Any] = null
-
     var boardRow:Array[String] = null
 
     var i = 0
@@ -649,7 +648,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
         else unmatched += 1 
         j += 1
       }
-      if (move_o >= 0 && unmatched >= 1) { //todo: place  a move o to the unmatched
+      if (move_o >= 0 && unmatched >= 1) {
         var j = 0
         while (  j < boardRow.length) {
           if (boardRow(j) == initSymbol) {
