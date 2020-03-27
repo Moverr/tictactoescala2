@@ -23,7 +23,7 @@ trait ITicTacToeService{
   def playRightLeftDiagonalWin(board:Array[Array[String]]):Any
   def placeHorizontalBlock(board:Array[Array[String]]):Any
   def placeVerticalBlock(board:Array[Array[String]],columnIndex:Int,unMatched:Int):Any
-  def playLeftRightDiagonalBlock(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
+  def playLeftRightDiagonalBlock(board:Array[Array[String]] ):Any
   def playRightLeftDiagonalBlock(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
   def playHorizontalMove(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
 
@@ -136,16 +136,9 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
       if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
 
 
-
       resultObject =  placeVerticalBlock(board, 0, 0).asInstanceOf[Array[Any]]
       board =  resultObject(1).asInstanceOf[Array[Array[String]]]
       if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
-
-
-
-      if(resultstatus === true){
-        return board;
-      }
 
 
 
@@ -504,10 +497,91 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
   }
 
   override def placeVerticalBlock(board: Array[Array[String]], columnIndex: Int, unMatched: Int): Any = {
+    val result:Array[Any] = null
+
+    var move_o = 0
+    var move_x = 0
+    var un_matched = unMatched
+    var boardRow:Array[String] = null
+
+
+    var i = 0
+    while (  i < board.length) {
+      boardRow = board(i)
+      if (boardRow(columnIndex) == player1) move_o += 1
+      else if (boardRow(columnIndex) == player2) move_x += 1
+      else if (boardRow(columnIndex) == initSymbol) un_matched += 1
+
+      i += 1
+    }
+
+
+    if ((move_x == 2) && (move_o == 0) && (un_matched == 1)) { //todo: place  a move o to the unmatched
+      var j = 0
+      while (  j < boardRow.length) {
+        if (boardRow(columnIndex) == initSymbol) {
+          boardRow(columnIndex) = player1
+          result(0) = true
+          result(1) = board
+          return result
+
+        }
+
+        j += 1
+      }
+    }
+
+    // console.log(board.length);
+    if (columnIndex < 3) {
+      var colum_index = columnIndex
+      return placeVerticalWin(board, colum_index, un_matched)
+    }
+
+    result(0) = true
+    result(1) = board
+      result
+
 
   }
 
-  override def playLeftRightDiagonalBlock(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
+  override def playLeftRightDiagonalBlock(board: Array[Array[String]]): Any = {
+    var unmatched = 0
+    var move_o = 0
+    var move_x = 0
+    var boardrow = 0
+
+    var i = 0
+    while ( {
+      i < board.length
+    }) {
+      boardrow = board(i)
+      if (boardrow(i) eq player1) move_o += 1
+      else if (boardrow(i) eq player2) move_x += 1
+      else if (boardrow(i) eq initsymbol) unmatched += 1
+      else {
+      }
+
+      i += 1
+    }
+
+
+    if ((move_x eq 2) && (move_o eq 0) && (unmatched eq 1)) {
+      var i = 0
+      while ( {
+        i < board.length
+      }) {
+        boardrow = board(i)
+        if (boardrow(i) eq initsymbol) {
+          boardrow(i) = player1
+          return callback(true, board)
+        }
+
+        i += 1
+      }
+    }
+
+    return callback(false, board)
+  }
 
   override def playRightLeftDiagonalBlock(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
 
