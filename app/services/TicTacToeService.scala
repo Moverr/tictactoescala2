@@ -346,7 +346,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
         if (boardRow(i) == initSymbol) {
           boardRow(i) = player1
           result(0) = true
-          result(1) = board 
+          result(1) = board
           return result
         }
 
@@ -354,9 +354,9 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
       }
     }
 
-    return callback(false, board)
-    
-
+    result(0) = false
+    result(1) = board
+    result
   }
 
   override def playRightLeftDiagonalWin(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
