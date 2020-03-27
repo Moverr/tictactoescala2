@@ -27,7 +27,7 @@ trait ITicTacToeService{
   def playRightLeftDiagonalBlock(board:Array[Array[String]]):Any
   def playHorizontalMove(board:Array[Array[String]] ):Any
 
-  def playVerticalMove(board:Array[Array[String]],columnIndex:Int,unMatched:Int,callBack:(Boolean,Array[String]) )
+  def playVerticalMove(board:Array[Array[String]],columnIndex:Int,unMatched:Int ):Any
   def playLeftRightDiagonalMove(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
   def playRightLeftDiagonalMove(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
 
@@ -670,7 +670,51 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   }
 
-  override def playVerticalMove(board: Array[Array[String]], columnIndex: Int, unMatched: Int, callBack: (Boolean, Array[String])): Unit = ???
+  override def playVerticalMove(board: Array[Array[String]], columnIndex: Int, unMatched: Int): Any = {
+
+    var move_o = 0
+    var move_x = 0
+    var boardRow:Array[String] = null
+    var unmatched = unMatched
+
+
+    var i = 0
+    while (  i < board.length) {
+      boardRow = board(i)
+      if (boardRow(columnIndex) == player1) move_o += 1
+      else if (boardRow(columnIndex) == player2) move_x += 1
+      else if (boardRow(columnIndex) == initSymbol) unmatched += 1
+      else {
+      }
+
+      i += 1
+    }
+
+
+    if (move_o >= 0 && unmatched >= 1) { //todo: place  a move o to the unmatched
+      var j = 0
+      while ( {
+        j < boardRow.length
+      }) {
+        if (boardRow(columnIndex) ==  initSymbol) {
+          boardRow(columnIndex) = player1
+          return callback(true, board)
+        }
+
+        j += 1
+      }
+    }
+
+    // console.log(board.length);
+    if (columnIndex < 3) {
+      columnIndex += 1
+      return placeVerticalWin(board, columnIndex, 0, callback)
+    }
+
+    return callback(false, board)
+
+
+  }
 
   override def playLeftRightDiagonalMove(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
 
