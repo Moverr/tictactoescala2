@@ -21,7 +21,7 @@ trait ITicTacToeService{
   def placeVerticalWin(board:Array[Array[String]],columnIndex:Int,unMatched:Int ):Any
   def playLeftRightDiagonalWin(board:Array[Array[String]]):Any
   def playRightLeftDiagonalWin(board:Array[Array[String]]):Any
-  def placeHorizontalBlock(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
+  def placeHorizontalBlock(board:Array[Array[String]]):Any
   def placeVerticalBlock(board:Array[Array[String]],columnIndex:Int,unMatched:Int,callBack:(Boolean,Array[String]) )
   def playLeftRightDiagonalBlock(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
   def playRightLeftDiagonalBlock(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
@@ -125,10 +125,49 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
       board =  resultObject(1).asInstanceOf[Array[Array[String]]]
       if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
 
+    }
 
 
 
-      //      playRightLeftDiagonalWin
+    {
+
+      placeHorizontalBlock(board);
+
+
+
+      placeVerticalBlock(board, 0, 0, (status, result) => {
+        if (status === true) {
+          resultstatus = true
+          return result;
+        }
+      });
+
+
+      if(resultstatus === true){
+        return board;
+      }
+
+
+
+      playLeftRigtDiagonalBlock(board, (status, result) => {
+        if (status === true) {
+          resultstatus = status
+          return result;
+        }
+      });
+
+
+      if(resultstatus === true){
+        return board;
+      }
+
+
+      playRightLeftDiagonalBlock(board, (status, result) => {
+        if (status === true) {
+          resultstatus = true
+          return result;
+        }
+      });
 
 
 
@@ -423,7 +462,50 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   }
 
-  override def placeHorizontalBlock(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
+  override def placeHorizontalBlock(board: Array[Array[String]]): Any ={
+    val result:Array[Any] = null
+
+
+    var boardRow:Array[String] = null
+    //todo: look through the vertical selection to find if there are existing 3 items of same type, x or o
+    var i = 0
+    while ( i < board.length) {
+      boardRow = board(i)
+      var move_o = 0
+      var move_x = 0
+      var unmatched = 0
+      var j = 0
+      while (  j < boardRow.length) {
+        if (boardRow(j) == player1) move_o += 1
+        else if (boardRow(j) == player2) move_x += 1
+        else unmatched += 1
+        j += 1
+      }
+
+      if ((move_x == 2) && (move_o == 0) && (unmatched == 1)) {
+        var j = 0
+        while ( {
+          j < boardRow.length
+        }) {
+          if (boardRow(j) == initSymbol) {
+            boardRow(j) = player1
+            board(i) = boardRow
+            result(0) == true
+            result(1) = board
+
+          }
+
+          j += 1
+        }
+      }
+
+      i += 1
+    }
+
+    result(0) == false
+    result(1) = board
+
+  }
 
   override def placeVerticalBlock(board: Array[Array[String]], columnIndex: Int, unMatched: Int, callBack: (Boolean, Array[String])): Unit = ???
 
