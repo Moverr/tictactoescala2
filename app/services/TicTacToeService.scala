@@ -31,7 +31,7 @@ trait ITicTacToeService{
   def playLeftRightDiagonalMove(board:Array[Array[String]] ):Any
   def playRightLeftDiagonalMove(board:Array[Array[String]]):Any
 
-  def shuffle(board:Array[String]):Array[String]
+  def shuffle(board:Array[Int]):Array[Int]
   def playNextMove(board:Array[String]): Array[String]
 
 
@@ -817,25 +817,25 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   }
 
-  override def shuffle(board: Array[String]): Array[String] = {
+  override def shuffle(a: Array[Int]): Array[Int] = {
     var j:Int = null
-    var x:String = null
+    var x:Int = null
     var i:Int= null
-    i = board.length - 1
+    i = a.length - 1
     while ( i > 0) {
       j = Math.floor(Math.random * (i + 1)).asInstanceOf[Int]
-      x = board(i)
-      board(i) = board(j)
-      board(j) = x
+      x = a(i)
+      a(i) = a(j)
+      a(j) = x
       i -= 1
     }
-    board
+    a
   }
 
   override def playNextMove(board: Array[String]): Array[String] = {
     var playmoves:Array[Int] = Array[Int](1, 2, 3, 4)
-    
-    let resultstatus;
+
+    var resultstatus:Any =  null;
     playmoves = shuffle(playmoves);
 
 
