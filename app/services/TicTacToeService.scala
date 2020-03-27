@@ -521,6 +521,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
       while (  j < boardRow.length) {
         if (boardRow(columnIndex) == initSymbol) {
           boardRow(columnIndex) = player1
+          board(i) = boardRow
           result(0) = true
           result(1) = board
           return result
@@ -539,27 +540,26 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
     result(0) = true
     result(1) = board
-      result
+    result
 
 
   }
 
   override def playLeftRightDiagonalBlock(board: Array[Array[String]]): Any = {
+    val result:Array[Any] = null
+
+
     var unmatched = 0
     var move_o = 0
     var move_x = 0
-    var boardrow = 0
+    var boardRow:Array[String] = null
 
     var i = 0
-    while ( {
-      i < board.length
-    }) {
-      boardrow = board(i)
-      if (boardrow(i) eq player1) move_o += 1
-      else if (boardrow(i) eq player2) move_x += 1
-      else if (boardrow(i) eq initsymbol) unmatched += 1
-      else {
-      }
+    while (i < board.length) {
+      boardRow = board(i)
+      if (boardRow(i) == player1) move_o += 1
+      else if (boardRow(i) == player2) move_x += 1
+      else if (boardRow(i) == initSymbol) unmatched += 1
 
       i += 1
     }
@@ -567,20 +567,26 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
     if ((move_x eq 2) && (move_o eq 0) && (unmatched eq 1)) {
       var i = 0
-      while ( {
-        i < board.length
-      }) {
-        boardrow = board(i)
-        if (boardrow(i) eq initsymbol) {
-          boardrow(i) = player1
-          return callback(true, board)
+      while ( i < board.length) {
+        boardRow = board(i)
+        if (boardRow(i) == initSymbol) {
+          boardRow(i) = player1
+          board(i) = boardRow
+          result(0) = true
+          result(1) = board;
+          return result;
+
         }
 
         i += 1
       }
     }
 
-    return callback(false, board)
+    result(0) = false
+    result(1) = board;
+    return result;
+
+
   }
 
   override def playRightLeftDiagonalBlock(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
