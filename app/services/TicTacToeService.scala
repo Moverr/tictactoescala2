@@ -671,6 +671,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
   }
 
   override def playVerticalMove(board: Array[Array[String]], columnIndex: Int, unMatched: Int): Any = {
+    val result:Array[Any] = null
 
     var move_o = 0
     var move_x = 0
@@ -691,27 +692,35 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     }
 
 
-    if (move_o >= 0 && unmatched >= 1) { //todo: place  a move o to the unmatched
+    if (move_o >= 0 && unmatched >= 1) {
+
       var j = 0
       while ( {
         j < boardRow.length
       }) {
         if (boardRow(columnIndex) ==  initSymbol) {
           boardRow(columnIndex) = player1
-          return callback(true, board)
+          result(0) = true
+          result(1) = board
+
+           return result
+
         }
 
         j += 1
       }
     }
 
-    // console.log(board.length);
+
     if (columnIndex < 3) {
-      columnIndex += 1
-      return placeVerticalWin(board, columnIndex, 0, callback)
+      val column_index = columnIndex
+      return placeVerticalWin(board, column_index,unmatched)
     }
 
-    return callback(false, board)
+    result(0) = false
+    result(1) = board
+
+    result
 
 
   }
