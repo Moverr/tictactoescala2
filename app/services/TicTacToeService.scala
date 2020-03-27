@@ -832,7 +832,14 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     board
   }
 
-  override def playNextMove(board: Array[String]): Array[String] = ???
+  override def playNextMove(board: Array[String]): Array[String] = {
+    var playmoves:Array[Int] = Array[Int](1, 2, 3, 4)
+    
+    let resultstatus;
+    playmoves = shuffle(playmoves);
+
+
+  }
 }
 
 
