@@ -24,7 +24,7 @@ trait ITicTacToeService{
   def placeHorizontalBlock(board:Array[Array[String]]):Any
   def placeVerticalBlock(board:Array[Array[String]],columnIndex:Int,unMatched:Int):Any
   def playLeftRightDiagonalBlock(board:Array[Array[String]] ):Any
-  def playRightLeftDiagonalBlock(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
+  def playRightLeftDiagonalBlock(board:Array[Array[String]])
   def playHorizontalMove(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
 
   def playVerticalMove(board:Array[Array[String]],columnIndex:Int,unMatched:Int,callBack:(Boolean,Array[String]) )
@@ -142,17 +142,10 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
 
 
-      playLeftRigtDiagonalBlock(board, (status, result) => {
-        if (status === true) {
-          resultstatus = status
-          return result;
-        }
-      });
+      resultObject = playLeftRightDiagonalBlock(board).asInstanceOf[Array[Any]]
+      board =  resultObject(1).asInstanceOf[Array[Array[String]]]
+      if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
 
-
-      if(resultstatus === true){
-        return board;
-      }
 
 
       playRightLeftDiagonalBlock(board, (status, result) => {
@@ -584,12 +577,51 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
     result(0) = false
     result(1) = board;
-    return result;
+    result;
 
 
   }
 
-  override def playRightLeftDiagonalBlock(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
+  override def playRightLeftDiagonalBlock(board: Array[Array[String]]): Any = {
+    var unmatched = 0
+    var move_o = 0
+    var move_x = 0
+    var boardRow:Array[String] = null
+
+    var boardIndex = board.length - 1
+
+    var i = 0
+    while ( i < board.length) {
+      boardRow = board(boardIndex)
+      if (boardRow(i) == player1) move_o += 1
+      else if (boardRow(i) == player2) move_x += 1
+      else if (boardRow(i) ==  initSymbol) unmatched += 1
+
+      boardIndex -= 1
+
+      i += 1
+    }
+
+
+    if ((move_x == 2) && (move_o == 0) && (unmatched ==  1)) {
+      boardIndex = board.length - 1
+      var i = 0
+      while (  i < board.length) {
+        boardRow = board(boardIndex)
+        if (boardRow(i) == initSymbol) {
+          boardRow(i) = player1
+          return callback(true, board)
+        }
+        boardIndex -= 1
+
+        i += 1
+      }
+    }
+
+    return callback(false, board)
+    
+
+  }
 
   override def playHorizontalMove(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
 
