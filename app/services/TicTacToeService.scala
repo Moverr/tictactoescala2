@@ -19,7 +19,7 @@ trait ITicTacToeService{
   //todo: THis function has a board array and a callback
   def placeHorizontalWin(board:Array[Array[String]]  ):Any
   def placeVerticalWin(board:Array[Array[String]],columnIndex:Int,unMatched:Int ):Any;
-  def playLeftRightDiagonalWin(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
+  def playLeftRightDiagonalWin(board:Array[Array[String]]):Any
   def playRightLeftDiagonalWin(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
   def placeHorizontalBlock(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
   def placeVerticalBlock(board:Array[Array[String]],columnIndex:Int,unMatched:Int,callBack:(Boolean,Array[String]) )
@@ -117,6 +117,9 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
       board =  resultObject(1).asInstanceOf[Array[Array[String]]]
       if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
 
+      resultObject = playLeftRightDiagonalWin(board)
+
+//      playRightLeftDiagonalWin
 
 
 
@@ -311,13 +314,50 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
       return placeVerticalWin(board, column_Index, un_matched)
     }
 
-    result(0) = true
+    result(0) = false
     result(1) = board
 
     result
   }
 
-  override def playLeftRightDiagonalWin(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
+  override def playLeftRightDiagonalWin(board: Array[Array[String]]): Any = {
+
+    val result:Array[Any] = null
+
+    var unmatched = 0
+    var move_o = 0
+    var move_x = 0
+    var boardRow:Array[String] = null;
+
+    var i = 0
+    while ( i < board.length) {
+      boardRow = board(i)
+      if (boardRow(i) eq player1) move_o += 1
+      else if (boardRow(i) == player2) move_x += 1
+      else if (boardRow(i) == initSymbol) unmatched += 1
+      i += 1
+    }
+
+
+    if ((move_o == 2) && (move_x == 0) && (unmatched == 1)) {
+      var i = 0
+      while (   i < board.length) {
+        boardRow = board(i)
+        if (boardRow(i) == initSymbol) {
+          boardRow(i) = player1
+          result(0) = true
+          result(1) = board 
+          return result
+        }
+
+        i += 1
+      }
+    }
+
+    return callback(false, board)
+    
+
+  }
 
   override def playRightLeftDiagonalWin(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
 
