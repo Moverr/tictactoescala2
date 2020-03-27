@@ -533,8 +533,8 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
     // console.log(board.length);
     if (columnIndex < 3) {
-      var colum_index = columnIndex
-      return placeVerticalWin(board, colum_index, un_matched)
+      val column_index = columnIndex
+      return placeVerticalWin(board, column_index, un_matched)
     }
 
     result(0) = true
