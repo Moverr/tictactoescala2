@@ -18,9 +18,9 @@ trait ITicTacToeService{
   def validateBoardString(board:String):Array[String]
   //todo: THis function has a board array and a callback
   def placeHorizontalWin(board:Array[Array[String]]  ):Any
-  def placeVerticalWin(board:Array[Array[String]],columnIndex:Int,unMatched:Int ):Any;
+  def placeVerticalWin(board:Array[Array[String]],columnIndex:Int,unMatched:Int ):Any
   def playLeftRightDiagonalWin(board:Array[Array[String]]):Any
-  def playRightLeftDiagonalWin(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
+  def playRightLeftDiagonalWin(board:Array[Array[String]]):Any
   def placeHorizontalBlock(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
   def placeVerticalBlock(board:Array[Array[String]],columnIndex:Int,unMatched:Int,callBack:(Boolean,Array[String]) )
   def playLeftRightDiagonalBlock(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
@@ -120,6 +120,8 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
       resultObject = playLeftRightDiagonalWin(board).asInstanceOf[Array[Any]]
       board =  resultObject(1).asInstanceOf[Array[Array[String]]]
       if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
+
+      playRightLeftDiagonalWin(board);
 
 
 
@@ -349,6 +351,8 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
         boardRow = board(i)
         if (boardRow(i) == initSymbol) {
           boardRow(i) = player1
+          board(i) = boardRow;
+
           result(0) = true
           result(1) = board
           return result
@@ -363,7 +367,58 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     result
   }
 
-  override def playRightLeftDiagonalWin(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
+  override def playRightLeftDiagonalWin(board: Array[Array[String]]): Any = {
+    val result:Array[Any] = null
+
+    var unmatched = 0
+    var move_o = 0
+    var move_x = 0
+    var boardRow:Array[String] = null;
+
+    var boardIndex = board.length - 1
+
+    var i = 0
+    while (  i < board.length) {
+      boardRow = board(boardIndex)
+      if (boardRow(i) ==  player1) move_o += 1
+      else if (boardRow(i) == player2) move_x += 1
+      else if (boardRow(i) ==  initSymbol) unmatched += 1
+
+      boardIndex -= 1
+
+      i += 1
+    }
+
+
+    if ((move_o eq 2) && (move_x eq 0) && (unmatched eq 1)) {
+      boardIndex = board.length - 1
+      var i = 0
+      while ( {
+        i < board.length
+      }) {
+        boardRow = board(boardIndex)
+        if (boardRow(i) ==  initSymbol) {
+          boardRow(i) = player1
+          board(boardIndex) = boardRow;
+
+          result(0) = true
+          result(1) = board
+          return result
+
+
+        }
+        boardIndex -= 1
+
+        i += 1
+      }
+    }
+
+    result(0) = true
+    result(1) = board
+    result
+
+
+  }
 
   override def placeHorizontalBlock(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
 
