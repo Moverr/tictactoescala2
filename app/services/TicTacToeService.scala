@@ -832,11 +832,24 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     a
   }
 
-  override def playNextMove(board: Array[String]): Array[String] = {
+  override def playNextMove(board: Array[Array[String]]): Any = {
     var playmoves:Array[Int] = Array[Int](1, 2, 3, 4)
 
-    var resultstatus:Any =  null;
-    playmoves = shuffle(playmoves);
+    var resultstatus:Any =  null
+    playmoves = shuffle(playmoves)
+    var x = 0
+    while(x < playmoves.length){
+      var playMove = playmoves(x)
+
+      playMove match {
+        case 1 => return playHorizontalMove(board)
+        case 2 => return playVerticalMove(board,0,0)
+        case 3 => return playLeftRightDiagonalMove(board)
+
+      }
+
+      x += 1
+    }
 
 
   }
