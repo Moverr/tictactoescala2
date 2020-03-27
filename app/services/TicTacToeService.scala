@@ -117,9 +117,13 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
       board =  resultObject(1).asInstanceOf[Array[Array[String]]]
       if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
 
-      resultObject = playLeftRightDiagonalWin(board)
+      resultObject = playLeftRightDiagonalWin(board).asInstanceOf[Array[Any]]
+      board =  resultObject(1).asInstanceOf[Array[Array[String]]]
+      if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
 
-//      playRightLeftDiagonalWin
+
+
+      //      playRightLeftDiagonalWin
 
 
 
