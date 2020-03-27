@@ -29,7 +29,7 @@ trait ITicTacToeService{
 
   def playVerticalMove(board:Array[Array[String]],columnIndex:Int,unMatched:Int ):Any
   def playLeftRightDiagonalMove(board:Array[Array[String]] ):Any
-  def playRightLeftDiagonalMove(board:Array[Array[String]], callBack:(Boolean,Array[String]) )
+  def playRightLeftDiagonalMove(board:Array[Array[String]]):Any
 
   def shuffle(board:Array[String]):Array[String]
   def playNextMove(board:Array[String]): Array[String]
@@ -728,7 +728,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   override def playLeftRightDiagonalMove(board: Array[Array[String]]): Any= {
     val result:Array[Any] = null
- 
+
     var unmatched = 0
     var move_o = 0
     var move_x = 0
@@ -766,7 +766,56 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     result
   }
 
-  override def playRightLeftDiagonalMove(board: Array[Array[String]], callBack: (Boolean, Array[String])): Unit = ???
+  override def playRightLeftDiagonalMove(board: Array[Array[String]]): Any = {
+
+    val result:Array[Any] = null
+
+
+    var unmatched = 0
+    var move_o = 0
+    var move_x = 0
+    var boardRow:Array[String] = null
+
+    var boardIndex = board.length - 1
+
+    var i = 0
+    while ( i < board.length) {
+      boardRow = board(boardIndex)
+      if (boardRow(i) == player1) move_o += 1
+      else if (boardRow(i) == player2) move_x += 1
+      else if (boardRow(i) == initSymbol) unmatched += 1
+      boardIndex -= 1
+      i += 1
+    }
+
+
+    if (move_o >= 0 && unmatched >= 1) {
+      boardIndex = board.length - 1
+      var i = 0
+      while ( {
+        i < board.length
+      }) {
+        boardRow = board(boardIndex)
+        if (boardRow(i) == initSymbol) {
+          boardRow(i) = player1
+          board(i) = boardRow
+
+          result(0) = true
+          result(1) = board
+          return result
+
+        }
+        boardIndex -= 1
+
+        i += 1
+      }
+    }
+
+    result(0) = false
+    result(1) = board
+    result
+
+  }
 
   override def shuffle(board: Array[String]): Array[String] = ???
 
