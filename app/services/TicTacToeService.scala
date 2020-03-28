@@ -118,7 +118,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     var board: Array[Array[String]] = null
 
     // 1) if empty string  or undefined meaning, the computer is playing first
-//     validateBoardString(boardString);
+     validateBoardString(boardString);
      board =   if (boardString.isEmpty())  populateBoard("    o    ") else  populateBoard(boardString)
 
     var result:Any = null
@@ -133,17 +133,19 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
         if(result.equals(player1) || result.equals(player2)) return board
 
+        /*
         result = findLeftRightDiagonalMatch(board)
 
         if(result.equals(player1) || result.equals(player2)) return board
 
         result = findRightLeftDiagonalMatch(board)
 
-        if(result.equals(player1) || result.equals(player2)) return board
+        if(result.equals(player1) || result.equals(player2)) return board  */
 
       }
 
 
+    /*
     var resultObject:Array[Any] = null;
     {
       resultObject  = placeHorizontalWin(board).asInstanceOf[Array[Any]]
@@ -195,21 +197,17 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
       {
           playNextMove(board)
       }
+*/
 
-      return board
 
-
+    board
 
     }
 
 
 
 
-
-    return null
-  }
-
-  override def findHorizontalMatch(board: Array[Array[String]]): Any = {
+   override def findHorizontalMatch(board: Array[Array[String]]): Any = {
 
     var unMatched:Int = 0
     for(i<-0 until(board.length-1,1)){
@@ -248,7 +246,7 @@ println("xxxxxxxxxxxxxxxx")
       throw new RuntimeException("Invalid Board length ")
     }
 
-    for(index <-0 until(boardArray.length,1)){
+    for(index <-0 until(boardArray.length-1,1)){
       val character = boardArray(index)
       if(!character.equalsIgnoreCase(player1) && !character.equalsIgnoreCase(player2)  && !character.equalsIgnoreCase(initSymbol)  ) throw new RuntimeException("Invalid Character, not acceptable ")
     }
@@ -323,7 +321,7 @@ println("xxxxxxxxxxxxxxxx")
     var move_o = 0
     var move_x = 0
     var boardRow:Array[String] = null
-    
+
     var i = 0
     while (  i < board.length -1 ) {
       boardRow = board(i)
@@ -343,6 +341,9 @@ println("xxxxxxxxxxxxxxxx")
   }
 
   override def findRightLeftDiagonalMatch(board: Array[Array[String]]): Any = {
+   if(board == null)
+     return  null
+
     var unmatched = 0
     var move_o = 0
     var move_x = 0

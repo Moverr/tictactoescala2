@@ -12,10 +12,10 @@ import play.api.test.Helpers._
 class TicTacToeServiceTest extends PlaySpec  with GuiceOneAppPerTest with Injecting {
 
  "Testing the InitGame" in   {
-   var board:String = "         ";
-   var service:TicTacToeService =   new TicTacToeService(board)
-   var response = service.initGame(board)
-   var expectedResult = Json.toJson(board)
+   val board:String = "         ";
+   val service:TicTacToeService =   new TicTacToeService(board)
+   val response = service.initGame(board)
+   val expectedResult = Json.toJson(board)
    response mustEqual expectedResult
 
  }
