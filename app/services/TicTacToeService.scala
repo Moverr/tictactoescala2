@@ -323,14 +323,13 @@ println("xxxxxxxxxxxxxxxx")
     var move_o = 0
     var move_x = 0
     var boardRow:Array[String] = null
-
+    
     var i = 0
     while (  i < board.length -1 ) {
       boardRow = board(i)
       if (boardRow(i) == player1) move_o += 1
       else if (boardRow(i) ==  player2) move_x += 1
       else if (boardRow(i) == initSymbol) unmatched += 1
-
       i += 1
     }
     if (move_o == 3)  player1
@@ -340,7 +339,6 @@ println("xxxxxxxxxxxxxxxx")
       val isUnmatched = findIfExistsUnmatched(board)
       if (isUnmatched == true)   board else  draw
     }
-
 
   }
 
