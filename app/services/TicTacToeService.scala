@@ -86,10 +86,11 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 //     var  boardJson = null
 //       Json.toJson(boardString)
 
-     val result: Array[Array[String]] = playGame(boardString)
-     val response:String = populateResponse(result)
+    val result: Array[Array[String]] = playGame(boardString)
+    println(result(0).mkString(""))
+  //   val response:String = populateResponse(result)
 
-   val boardJson = Json.toJson(response)
+   val boardJson = Json.toJson(boardString)
     boardJson
 
   }
@@ -121,17 +122,32 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
      validateBoardString(boardString);
      board =   if (boardString.isEmpty())  populateBoard("    o    ") else  populateBoard(boardString)
 
+
     var result:Any = null
 
-      result = findHorizontalMatch(board)
-      if(result.equals(player1) || result.equals(player2)){
-          return board;
-      }
+    result = findHorizontalMatch(board)
+    if(result.equals(player1) || result.equals(player2)) return board;
 
-      {
-        result = findVerticalMatch(board)
+    result = findVerticalMatch(board)
+    if(result.equals(player1) || result.equals(player2)) return board
 
-        if(result.equals(player1) || result.equals(player2)) return board
+
+
+    println("/////////////////////////////////////")
+    println(result);
+
+    /*
+    result = findVerticalMatch(board)
+    if(result.equals(player1) || result.equals(player2)) return board
+
+    result = findLeftRightDiagonalMatch(board)
+    if(result.equals(player1) || result.equals(player2)) return board
+
+    result = findRightLeftDiagonalMatch(board)
+    if(result.equals(player1) || result.equals(player2)) return board
+    */
+
+    {
 
         /*
         result = findLeftRightDiagonalMatch(board)
@@ -256,6 +272,8 @@ println("xxxxxxxxxxxxxxxx")
 
   override def rotateThroughBoardColumns(board: Array[Array[String]], columnIndex: Int, unMatched: Int): Any = {
 
+    var  column_index = columnIndex
+
     if(columnIndex > 3) {
       println("Killer")
       return board
@@ -263,36 +281,40 @@ println("xxxxxxxxxxxxxxxx")
 
     var move_o: Int = 0
     var move_x: Int = 0
-    var un_matched:Int = unMatched;
+    var un_matched:Int = unMatched
 
-    println("-------------------------------------")
-    println(columnIndex.toString())
-    println("-------------------------------------")
+    val boardRow = board(column_index);
 
-
-    for (i <- columnIndex until(board.length-1)) {
-      val boardRow = board(i)
-      if (boardRow(columnIndex) == player1) move_o +=1
-      else if (boardRow(columnIndex) ==  player2 )  move_x +=1
-      else if (boardRow(columnIndex) == initSymbol) un_matched += 1
+    var i:Int = 0;
+    while(i < boardRow.length){
+      if (boardRow(i) == player1) move_o +=1
+      else if (boardRow(i) ==  player2 )  move_x +=1
+      else if (boardRow(i) == initSymbol) un_matched = un_matched + 1
+      i += 1
     }
 
-    if (move_o ==  3) return player1
-    else if (move_x ==  3) return player2
-    else if ( (columnIndex == 3)  &&  un_matched > 0)  return board
-    else if (columnIndex ==  3)  return draw
+
+    if (move_o ==  3)  return  player1
+    else if (move_x ==  3)   return  player2
+    else if ( (columnIndex >= 2)  &&  un_matched > 0)  return   board
+    else if (columnIndex >=  2)   return  draw
     else{
-      val  column_index = columnIndex + 1;
-      println("JESUS")
-      rotateThroughBoardColumns(board, column_index, un_matched);
+
+      column_index += 1
+      return      rotateThroughBoardColumns(board, column_index, un_matched);
+
     }
+
+    board
   }
 
   override def findVerticalMatch(board: Array[Array[String]]): Any = {
     val columnIndex: Int = 0
     val unmatched: Int = 0
-    val result: Any = rotateThroughBoardColumns(board, columnIndex, unmatched)
-    result
+    val response  = rotateThroughBoardColumns(board, columnIndex, unmatched)
+
+    println(response)
+    response
 
   }
 
