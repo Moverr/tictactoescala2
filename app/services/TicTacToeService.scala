@@ -304,7 +304,19 @@ println("xxxxxxxxxxxxxxxx")
 
   }
 
-  override def findIfExistsUnmatched(board: Array[Array[String]]): Boolean = ???
+  override def findIfExistsUnmatched(board: Array[Array[String]]): Boolean = {
+
+    var boardRow:Array[String] = null
+    var i = 0
+    while (i < board.length) {
+      boardRow = board(i)
+      if (boardRow(i) == initSymbol) return true
+
+      i += 1
+    }
+
+    false
+  }
 
   override def findLeftRightDiagonalMatch(board: Array[Array[String]]): Any = {
     var unmatched = 0
