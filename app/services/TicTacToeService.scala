@@ -1,5 +1,6 @@
 package services
 
+import  util.control.Breaks._
 import com.fasterxml.jackson.annotation.JsonValue
 import javax.inject.Singleton
 import play.api.libs.json.{JsValue, Json}
@@ -50,10 +51,36 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
   var draw = 0;
 
 
+  def populateResponse(board:Array[Array[String]]):Any={
+
+    var result = ""
+    var boardrow:Array[String] = null
+    var i = 0
+    while (   i < board.length) {
+        boardrow = board(i)
+
+        var j = 0
+        while ( j < boardrow.length) {
+          if (boardrow(j) ==  player1) result = result + "" + player1
+          else if (boardrow(j) ==  player2) result += player2
+          else if (boardrow(js) ==  initSymbol) result += " "
+          else{
+            dddd
+          }
+          j += 1
+        }
+
+        i += 1
+      }
+
+
+
+  }
 
   @Override def initGame(): JsValue = {
      val  boardJson = Json.toJson(boardString)
-   //  val result = playGame(this.boardString)
+     val result = playGame(this.boardString)
+    val response = populateRes
       return boardJson
   }
 
