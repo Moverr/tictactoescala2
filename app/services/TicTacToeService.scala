@@ -433,7 +433,6 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
           result(1) = board
           return result
 
-
         }
         boardIndex -= 1
 
@@ -769,7 +768,6 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
   override def playRightLeftDiagonalMove(board: Array[Array[String]]): Any = {
 
     val result:Array[Any] = null
-
 
     var unmatched = 0
     var move_o = 0
