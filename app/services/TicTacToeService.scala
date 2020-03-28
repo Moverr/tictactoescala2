@@ -337,7 +337,7 @@ println("xxxxxxxxxxxxxxxx")
     else if (move_x == 3)  player2
 
     else {
-      val isUnmatched = findifExistsUnmatched(board)
+      val isUnmatched = findIfExistsUnmatched(board)
       if (isUnmatched == true)   board else  draw
     }
 
