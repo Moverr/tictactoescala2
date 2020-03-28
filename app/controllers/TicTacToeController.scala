@@ -31,7 +31,7 @@ class TicTacToeController  @Inject()(cc:ControllerComponents) extends  AbstractC
   }
 
   def index(board:String ) =Action{
-    val result = new TicTacToeService(board).initGame();
+    val result = new TicTacToeService(board).initGame(board);
     Ok((result));
   }
 

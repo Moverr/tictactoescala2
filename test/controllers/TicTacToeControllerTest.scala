@@ -10,6 +10,7 @@ import play.api.test.Helpers._
 
 class TicTacToeControllerTest extends PlaySpec  with GuiceOneAppPerTest with Injecting {
 
+  /*
 
 
    "render the index page from a new instance of controller" in {
@@ -40,5 +41,5 @@ class TicTacToeControllerTest extends PlaySpec  with GuiceOneAppPerTest with Inj
 //  test("testGetEmployee") {
 //
 //  }
-
+*/
 }

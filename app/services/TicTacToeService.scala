@@ -7,7 +7,7 @@ import play.api.libs.json.{JsValue, Json}
 
 
 trait ITicTacToeService{
-  def initGame(): JsValue
+  def initGame(boardString:String): JsValue
   def populateBoard( moves:String): Array[Array[String]]
   def playGame(boardString:String):  Array[Array[String]]
   def findHorizontalMatch(board:Array[Array[String]]):Any
@@ -50,38 +50,48 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
   var initSymbol = " ";
   var draw = 0;
 
-
-  def populateResponse(board:Array[Array[String]]):Any={
+  def populateResponse(board:Array[Array[String]]):String={
 
     var result = ""
-    var boardrow:Array[String] = null
+    var boardRow:Array[String] = null
     var i = 0
     while (   i < board.length) {
-        boardrow = board(i)
+        boardRow = board(i)
 
         var j = 0
-        while ( j < boardrow.length) {
-          if (boardrow(j) ==  player1) result = result + "" + player1
-          else if (boardrow(j) ==  player2) result += player2
-          else if (boardrow(js) ==  initSymbol) result += " "
-          else{
-            dddd
+        while ( j < boardRow.length) {
+          breakable{
+            if (boardRow(j) ==  player1) result = result + "" + player1
+            else if (boardRow(j) ==  player2) result += player2
+            else if (boardRow(j) ==  initSymbol) result += " "
+            else{
+              break
+            }
+            j += 1
+
           }
-          j += 1
+
+
         }
 
         i += 1
       }
 
 
+    result
 
   }
 
-  @Override def initGame(): JsValue = {
-     val  boardJson = Json.toJson(boardString)
-     val result = playGame(this.boardString)
-    val response = populateRes
-      return boardJson
+  @Override def initGame(boardString:String): JsValue = {
+//     var  boardJson = null
+//       Json.toJson(boardString)
+
+     val result: Array[Array[String]] = playGame(boardString)
+     val response:String = populateResponse(result)
+
+   val boardJson = Json.toJson(response)
+    boardJson
+
   }
 
   //populate Board
@@ -93,9 +103,9 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     val board: Array[Array[String]] = new Array[Array[String]](3);
 
     var boardIndex:Int = 0;
-    for(i<-0 until(3,1)){
-        var boardRow:Array[String]= new Array[String](3);
-        for(j<-0 until(3,1)){
+    for(i<-0 until(2)){
+        val boardRow:Array[String]= new Array[String](3);
+        for(j<-0 until(2)){
           boardRow(j)  =   if(movesArray(boardIndex) == player1 || movesArray(boardIndex) == player2)  movesArray(boardIndex) else initSymbol
           boardIndex += 1
         }
@@ -108,8 +118,8 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     var board: Array[Array[String]] = null
 
     // 1) if empty string  or undefined meaning, the computer is playing first
-     validateBoardString(boardString);
-     board =   if (boardString.isEmpty())  populateBoard("++++o++++") else  populateBoard(boardString)
+//     validateBoardString(boardString);
+     board =   if (boardString.isEmpty())  populateBoard("    o    ") else  populateBoard(boardString)
 
     var result:Any = null
 
@@ -202,11 +212,11 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
   override def findHorizontalMatch(board: Array[Array[String]]): Any = {
 
     var unMatched:Int = 0
-    for(i<-0 until(board.length,1)){
+    for(i<-0 until(board.length-1,1)){
       var boardRow = board(i)
       var move_o :Int = 0
       var move_x  :Int = 0
-      for(j<-0 until(board.length,1)){
+      for(j<-0 until(board.length-1,1)){
          if(boardRow(j).equals(player1)){
            move_o +=1
          }
@@ -232,6 +242,8 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
       return null
     }
     val boardArray:Array[String] = board.split("")
+println("xxxxxxxxxxxxxxxx")
+    println(boardArray.length)
     if(boardArray.length <  9 ){
       throw new RuntimeException("Invalid Board length ")
     }
@@ -248,10 +260,16 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
     var move_o: Int = 0
     var move_x: Int = 0
-    var un_matched:Int = 0;
+    var un_matched:Int = unMatched;
 
-    for (i <- 0 until(board.length, 1)) {
-      var boardRow = board(i)
+    println("-------------------------------------")
+    println(board.length.toString())
+
+    println("-------------------------------------")
+
+
+    for (i <- columnIndex until(board.length-1)) {
+      val boardRow = board(i)
 
       if (boardRow(columnIndex).equals(player1)) {
         move_o +=1
@@ -272,7 +290,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
     if (columnIndex ==  3)  return draw
 
-    var  column_index = columnIndex + 1;
+    val  column_index = columnIndex + 1;
 
     rotateThroughBoardColumns(board, column_index, un_matched);
 
@@ -288,9 +306,61 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   override def findIfExistsUnmatched(board: Array[Array[String]]): Boolean = ???
 
-  override def findLeftRightDiagonalMatch(board: Array[Array[String]]): Any = ???
+  override def findLeftRightDiagonalMatch(board: Array[Array[String]]): Any = {
+    var unmatched = 0
+    var move_o = 0
+    var move_x = 0
+    var boardRow:Array[String] = null
 
-  override def findRightLeftDiagonalMatch(board: Array[Array[String]]): Any = ???
+    var i = 0
+    while (  i < board.length -1 ) {
+      boardRow = board(i)
+      if (boardRow(i) == player1) move_o += 1
+      else if (boardRow(i) ==  player2) move_x += 1
+      else if (boardRow(i) == initSymbol) unmatched += 1
+
+      i += 1
+    }
+    if (move_o == 3)  player1
+    else if (move_x == 3)  player2
+
+    else {
+      val isUnmatched = findifExistsUnmatched(board)
+      if (isUnmatched == true)   board else  draw
+    }
+
+
+  }
+
+  override def findRightLeftDiagonalMatch(board: Array[Array[String]]): Any = {
+    var unmatched = 0
+    var move_o = 0
+    var move_x = 0
+    var boardRow:Array[String] = null
+
+    var boardIndex = board.length - 1
+
+    var i = 0
+    while ( i < board.length-1 ) {
+      boardRow = board(boardIndex)
+      if (boardRow(i) == player1) move_o += 1
+      else if (boardRow(i) ==  player2) move_x += 1
+      else if (boardRow(i) == initSymbol) unmatched += 1
+
+      boardIndex -= 1
+
+      i += 1
+    }
+
+
+    if (move_o == 3)   player1
+    else if (move_x == 3)   player2
+    else {
+      val isUnmatched = findIfExistsUnmatched(board)
+      if (isUnmatched == true)  board else   draw
+    }
+
+  }
 
   override def placeHorizontalWin(board: Array[Array[String]]   ):Any={
 
