@@ -148,12 +148,18 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
 
 
-      playRightLeftDiagonalBlock(board, (status, result) => {
-        if (status === true) {
-          resultstatus = true
-          return result;
-        }
-      });
+      resultObject =  playRightLeftDiagonalBlock(board).asInstanceOf[Array[Any]]
+      board =  resultObject(1).asInstanceOf[Array[Array[String]]]
+      if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
+
+
+      //play  the next second match
+      //play  the next second match
+      {
+          playNextMove(board)
+      }
+
+      return board
 
 
 
@@ -418,7 +424,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     }
 
 
-    if ((move_o eq 2) && (move_x eq 0) && (unmatched eq 1)) {
+    if ((move_o == 2) && (move_x == 0) && (unmatched == 1)) {
       boardIndex = board.length - 1
       var i = 0
       while ( {
@@ -557,7 +563,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     }
 
 
-    if ((move_x eq 2) && (move_o eq 0) && (unmatched eq 1)) {
+    if ((move_x == 2) && (move_o == 0) && (unmatched == 1)) {
       var i = 0
       while ( i < board.length) {
         boardRow = board(i)
@@ -567,7 +573,6 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
           result(0) = true
           result(1) = board;
           return result;
-
         }
 
         i += 1
@@ -575,8 +580,8 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     }
 
     result(0) = false
-    result(1) = board;
-    result;
+    result(1) = board
+    result
 
 
   }
@@ -816,9 +821,9 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
   }
 
   override def shuffle(a: Array[Int]): Array[Int] = {
-    var j:Int = null
-    var x:Int = null
-    var i:Int= null
+    var j:Int = 0
+    var x:Int = 0
+    var i:Int= 0
     i = a.length - 1
     while ( i > 0) {
       j = Math.floor(Math.random * (i + 1)).asInstanceOf[Int]
