@@ -47,7 +47,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   var player1 = "o";
   var player2 = "x";
-  var initSymbol = " ";
+  var initSymbol = "+";
   var draw = 0;
 
   def populateResponse(board:Array[Array[String]]):String={
@@ -103,15 +103,22 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     val movesArray:Array[String] = moves.split("")
     val board: Array[Array[String]] = new Array[Array[String]](3);
 
-    var boardIndex:Int = 0;
-    for(i<-0 until(2)){
+    var index:Int = 0;
+    var i:Int = 0
+
+    while(i < 3) {
         val boardRow:Array[String]= new Array[String](3);
-        for(j<-0 until(2)){
-          boardRow(j)  =   if(movesArray(boardIndex) == player1 || movesArray(boardIndex) == player2)  movesArray(boardIndex) else initSymbol
-          boardIndex += 1
+        index = 0
+      var j = 0
+        while(j< 3) {
+          boardRow(j)  =   if(movesArray(index) == player1 || movesArray(index) == player2)  movesArray(index) else initSymbol
+          index += 1
+          j += 1
         }
       board(i) = boardRow;
-     }
+    i += 1
+
+    }
     board
   }
 
@@ -286,10 +293,11 @@ println("xxxxxxxxxxxxxxxx")
     val boardRow = board(column_index);
 
     var i:Int = 0;
-    while(i < boardRow.length){
-      if (boardRow(i) == player1) move_o +=1
-      else if (boardRow(i) ==  player2 )  move_x +=1
-      else if (boardRow(i) == initSymbol) un_matched = un_matched + 1
+    while(i < 3){
+      if (boardRow(i) == player1) move_o =move_o+1
+       if (boardRow(i) ==  player2 )  move_x =move_x+1
+       if (boardRow(i) == initSymbol) un_matched = un_matched + 1
+
       i += 1
     }
 

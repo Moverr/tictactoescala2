@@ -12,7 +12,7 @@ import play.api.test.Helpers._
 class TicTacToeServiceTest extends PlaySpec  with GuiceOneAppPerTest with Injecting {
 
  "Testing the InitGame" in   {
-   val board:String = "         ";
+   val board:String = "+++++++++";
    val service:TicTacToeService =   new TicTacToeService(board)
    val response = service.initGame(board)
    val expectedResult = Json.toJson(board)
