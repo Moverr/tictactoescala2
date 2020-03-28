@@ -256,42 +256,36 @@ println("xxxxxxxxxxxxxxxx")
 
   override def rotateThroughBoardColumns(board: Array[Array[String]], columnIndex: Int, unMatched: Int): Any = {
 
+    if(columnIndex > 3) {
+      println("Killer")
+      return board
+    }
+
     var move_o: Int = 0
     var move_x: Int = 0
     var un_matched:Int = unMatched;
 
     println("-------------------------------------")
-    println(board.length.toString())
-
+    println(columnIndex.toString())
     println("-------------------------------------")
 
 
     for (i <- columnIndex until(board.length-1)) {
       val boardRow = board(i)
-
-      if (boardRow(columnIndex).equals(player1)) {
-        move_o +=1
-      }
-      else if (boardRow(columnIndex).equals(player2) ) {
-        move_x +=1
-      } else if (boardRow(columnIndex).equals(initSymbol)) {
-        un_matched += 1
-      }
-
+      if (boardRow(columnIndex) == player1) move_o +=1
+      else if (boardRow(columnIndex) ==  player2 )  move_x +=1
+      else if (boardRow(columnIndex) == initSymbol) un_matched += 1
     }
 
     if (move_o ==  3) return player1
-
-    if (move_x ==  3) return player2
-
-    if ( (columnIndex == 3)  &&  un_matched > 0)  return board
-
-    if (columnIndex ==  3)  return draw
-
-    val  column_index = columnIndex + 1;
-
-    rotateThroughBoardColumns(board, column_index, un_matched);
-
+    else if (move_x ==  3) return player2
+    else if ( (columnIndex == 3)  &&  un_matched > 0)  return board
+    else if (columnIndex ==  3)  return draw
+    else{
+      val  column_index = columnIndex + 1;
+      println("JESUS")
+      rotateThroughBoardColumns(board, column_index, un_matched);
+    }
   }
 
   override def findVerticalMatch(board: Array[Array[String]]): Any = {
