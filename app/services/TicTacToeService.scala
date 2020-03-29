@@ -139,16 +139,11 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     if(result.equals(player1) || result.equals(player2)) return board
 
 
-
-    println("/////////////////////////////////////")
-    println(result);
-
-    /*
-    result = findVerticalMatch(board)
-    if(result.equals(player1) || result.equals(player2)) return board
-
     result = findLeftRightDiagonalMatch(board)
     if(result.equals(player1) || result.equals(player2)) return board
+
+
+    /*
 
     result = findRightLeftDiagonalMatch(board)
     if(result.equals(player1) || result.equals(player2)) return board
@@ -281,10 +276,7 @@ println("xxxxxxxxxxxxxxxx")
 
     var  column_index = columnIndex
 
-    if(columnIndex > 3) {
-      println("Killer")
-      return board
-    }
+    if(columnIndex > 3)  return board
 
     var move_o: Int = 0
     var move_x: Int = 0
@@ -302,28 +294,23 @@ println("xxxxxxxxxxxxxxxx")
     }
 
 
-    if (move_o ==  3)  return  player1
-    else if (move_x ==  3)   return  player2
-    else if ( (columnIndex >= 2)  &&  un_matched > 0)  return   board
-    else if (columnIndex >=  2)   return  draw
+    if (move_o ==  3)     player1
+    else if (move_x ==  3)      player2
+    else if ( (columnIndex >= 2)  &&  un_matched > 0)      board
+    else if (columnIndex >=  2)      draw
     else{
-
       column_index += 1
-      return      rotateThroughBoardColumns(board, column_index, un_matched);
-
+      rotateThroughBoardColumns(board, column_index, un_matched);
     }
 
-    board
+
   }
 
   override def findVerticalMatch(board: Array[Array[String]]): Any = {
     val columnIndex: Int = 0
     val unmatched: Int = 0
     val response  = rotateThroughBoardColumns(board, columnIndex, unmatched)
-
-    println(response)
     response
-
   }
 
   override def findIfExistsUnmatched(board: Array[Array[String]]): Boolean = {
