@@ -604,7 +604,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
   }
 
   override def placeVerticalBlock(board: Array[Array[String]], columnIndex: Int, unMatched: Int): Array[Array[String]] = {
-    val result: Array[Any] = null
+
 
     var move_o = 0
     var move_x = 0
@@ -654,8 +654,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   }
 
-  override def playLeftRightDiagonalBlock(board: Array[Array[String]]): Any = {
-    val result: Array[Any] = null
+  override def playLeftRightDiagonalBlock(board: Array[Array[String]]): Array[Array[String]] = {
 
 
     var unmatched = 0
@@ -681,24 +680,20 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
         if (boardRow(i) == initSymbol) {
           boardRow(i) = player1
           board(i) = boardRow
-          result(0) = true
-          result(1) = board;
-          return result;
+          resultantStatus = true
+          return  board
+
         }
 
         i += 1
       }
     }
 
-    result(0) = false
-    result(1) = board
-    result
-
-
+    resultantStatus = false
+    board
   }
 
-  override def playRightLeftDiagonalBlock(board: Array[Array[String]]): Any = {
-    val result: Array[Any] = null
+  override def playRightLeftDiagonalBlock(board: Array[Array[String]]): Array[Array[String]] = {
 
     var unmatched = 0
     var move_o = 0
@@ -727,11 +722,9 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
         boardRow = board(boardIndex)
         if (boardRow(i) == initSymbol) {
           boardRow(i) = player1
+          resultantStatus = true
+          return  board
 
-          result(0) == true
-          result(1) == board
-
-          return result
         }
         boardIndex -= 1
 
@@ -740,13 +733,12 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     }
 
 
-    result(0) == false
-    result(1) == board
-    result
+    resultantStatus = false
+    board
 
   }
 
-  override def playHorizontalMove(board: Array[Array[String]]): Any = {
+  override def playHorizontalMove(board: Array[Array[String]]): Array[Array[String]] = {
     val result: Array[Any] = null
     var boardRow: Array[String] = null
 
@@ -769,9 +761,11 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
           if (boardRow(j) == initSymbol) {
             boardRow(j) = player1
             board(i) = boardRow
-            result(0) = true
-            result(1) = board
-            return result
+
+            resultantStatus = true
+            return board
+
+
           }
 
           j += 1
@@ -780,10 +774,9 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
       i += 1
     }
-    result(0) = true
-    result(1) = board
-    result
 
+    resultantStatus = false
+    board
   }
 
   override def playVerticalMove(board: Array[Array[String]], columnIndex: Int, unMatched: Int): Any = {
