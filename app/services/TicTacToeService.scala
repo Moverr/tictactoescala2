@@ -103,7 +103,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   @Override def initGame(boardString: String): JsValue = {
     val result: Array[Array[String]] = playGame(boardString)
-    val response:String = populateResponse(result)
+    val response: String = populateResponse(result)
     println(response)
     val boardJson = Json.toJson(boardString)
     boardJson
@@ -111,18 +111,19 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   //populate Board
   override def populateBoard(moves: String): Array[Array[String]] = {
-    if (moves.isEmpty()) {
-      return null
-    }
-    val movesArray: Array[String] = moves.split("")
+
+    val movesArray: Array[String] = if (moves.isEmpty()) "    o    ".split("") else moves.split("")
+
     val board: Array[Array[String]] = new Array[Array[String]](3);
 
     var index: Int = 0;
     var i: Int = 0
+    var boardRow: Array[String] = null
 
     while (i < 3) {
-      val boardRow: Array[String] = new Array[String](3);
-      index = 0
+      boardRow = new Array[String](3);
+
+
       var j = 0
       while (j < 3) {
         boardRow(j) = if (movesArray(index) == player1 || movesArray(index) == player2) movesArray(index) else initSymbol
@@ -143,17 +144,17 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
     // 1) if empty string  or undefined meaning, the computer is playing first
     validateBoardString(boardString)
-   // board = if (boardString.isEmpty()) populateBoard("    o    ") else
+    board = if (boardString.isEmpty()) populateBoard("    o    ") else populateBoard(boardString)
 
-    board = populateBoard("    o    ")
-    board = populateBoard(boardString)
+    //    board = populateBoard("    o    ")
+    //    board = populateBoard(boardString)
 
     //todo: find if I started the first move
 
     //    Step 1
 
     var result: Any = null
-/*
+
     result = findHorizontalMatch(board)
     if (result.equals(player1) || result.equals(player2)) return board;
 
@@ -168,10 +169,10 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     result = findRightLeftDiagonalMatch(board)
     if (result.equals(player1) || result.equals(player2)) return board
 
-    */
+
 
     //    Step 2
-/*
+
     var resultObject: Array[Array[String]] = board;
     resultObject = placeHorizontalWin(board)
     if (resultantStatus == true) return resultObject
@@ -191,9 +192,9 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     resultObject = playRightLeftDiagonalWin(board)
     if (resultantStatus == true) return resultObject
     resultantStatus = false
-*/
+
     //Step 3
-  /*  resultObject = placeHorizontalBlock(board)
+    resultObject = placeHorizontalBlock(board)
     if (resultantStatus == true) return resultObject
     resultantStatus = false
 
@@ -211,10 +212,9 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     resultObject = playRightLeftDiagonalBlock(board)
     if (resultantStatus == true) return resultObject
     resultantStatus = false
-*/
 
-// Level 3
-//   board =  playNextMove(board)
+    // Level 3
+    //   board =  playNextMove(board)
 
     board
 
@@ -266,7 +266,6 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     }
     boardArray
   }
-
 
 
   override def rotateThroughBoardColumns(board: Array[Array[String]], columnIndex: Int, unMatched: Int): Any = {
@@ -456,7 +455,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     }
     else {
       val column_Index = columnIndex + 1
-        placeVerticalWin(board, column_Index, un_matched)
+      placeVerticalWin(board, column_Index, un_matched)
 
     }
 
@@ -720,7 +719,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
   }
 
   override def playHorizontalMove(board: Array[Array[String]]): Array[Array[String]] = {
-     var boardRow: Array[String] = null
+    var boardRow: Array[String] = null
 
     var i = 0
     while (i < board.length) {
@@ -768,7 +767,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
 
     var i = 0
-    while (i < board.length-1) {
+    while (i < board.length - 1) {
       boardRow = board(i)
       if (boardRow(columnIndex) == player1) move_o += 1
       else if (boardRow(columnIndex) == player2) move_x += 1
@@ -783,12 +782,12 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     if (move_o >= 0 && unmatched >= 1) {
 
       var j = 0
-      while ( j < boardRow.length-1) {
+      while (j < boardRow.length - 1) {
         if (boardRow(columnIndex) == initSymbol) {
           boardRow(columnIndex) = player1
 
           resultantStatus = true
-          return  board
+          return board
 
 
         }
@@ -798,12 +797,12 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     }
 
 
-    if(columnIndex > 2){
+    if (columnIndex > 2) {
       resultantStatus = false
-         board
-    }else{
+      board
+    } else {
       val column_index = columnIndex
-        placeVerticalWin(board, column_index, unmatched)
+      placeVerticalWin(board, column_index, unmatched)
     }
 
 
@@ -859,7 +858,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     var boardIndex = board.length - 1
 
     var i = 0
-    while (i < board.length-1) {
+    while (i < board.length - 1) {
       boardRow = board(boardIndex)
       if (boardRow(i) == player1) move_o += 1
       else if (boardRow(i) == player2) move_x += 1
@@ -872,14 +871,14 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     if (move_o >= 0 && unmatched >= 1) {
       boardIndex = board.length - 1
       var i = 0
-      while ( i < board.length) {
+      while (i < board.length) {
         boardRow = board(boardIndex)
         if (boardRow(i) == initSymbol) {
           boardRow(i) = player1
           board(i) = boardRow
 
           resultantStatus = true
-          return  board
+          return board
 
 
         }
@@ -890,7 +889,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     }
 
     resultantStatus = false
-     board
+    board
 
   }
 
@@ -909,7 +908,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     a
   }
 
-  override def playNextMove(board: Array[Array[String]]):  Array[Array[String]] = {
+  override def playNextMove(board: Array[Array[String]]): Array[Array[String]] = {
     var playMoves: Array[Int] = Array[Int](1, 2, 3, 4)
     playMoves = shuffle(playMoves)
     var x = 0
