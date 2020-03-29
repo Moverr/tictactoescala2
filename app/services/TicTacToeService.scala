@@ -175,7 +175,6 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     var resultObject: Array[Array[String]] = board;
     resultObject = placeHorizontalWin(board)
     if (resultantStatus == true) return resultObject
-
     resultantStatus = false
 
 
@@ -189,10 +188,9 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     resultantStatus = false
 
 
-    resultObject = playRightLeftDiagonalWin(board).asInstanceOf[Array[Any]];
-    board = resultObject(1).asInstanceOf[Array[Array[String]]]
-    if (resultObject(0).asInstanceOf[Boolean] == true) return board
-
+    resultObject = playRightLeftDiagonalWin(board);
+    if (resultantStatus == true) return resultObject
+    resultantStatus = false
 
 
 
