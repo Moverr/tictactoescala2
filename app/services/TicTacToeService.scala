@@ -561,8 +561,8 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   }
 
-  override def placeHorizontalBlock(board: Array[Array[String]]): Any = {
-    val result: Array[Any] = null
+  override def placeHorizontalBlock(board: Array[Array[String]]): Array[Array[String]] = {
+
     var boardRow: Array[String] = null
     //todo: look through the vertical selection to find if there are existing 3 items of same type, x or o
     var i = 0
@@ -585,8 +585,9 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
           if (boardRow(j) == initSymbol) {
             boardRow(j) = player1
             board(i) = boardRow
-            result(0) == true
-            result(1) = board
+
+            resultantStatus = true
+            return  board
 
           }
 
@@ -596,9 +597,9 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
       i += 1
     }
+    resultantStatus = false
+    board
 
-    result(0) == false
-    result(1) = board
 
   }
 
