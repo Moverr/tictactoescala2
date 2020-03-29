@@ -522,14 +522,11 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   override def playRightLeftDiagonalWin(board: Array[Array[String]]): Array[Array[String]] = {
 
-
     var unmatched = 0
     var move_o = 0
     var move_x = 0
     var boardRow: Array[String] = null;
-
     var boardIndex = board.length - 1
-
     var i = 0
     while (i < board.length) {
       boardRow = board(boardIndex)
@@ -553,21 +550,16 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
         if (boardRow(i) == initSymbol) {
           boardRow(i) = player1
           board(boardIndex) = boardRow;
-
           resultantStatus = true
           return board
-
         }
         boardIndex -= 1
-
         i += 1
       }
     }
     resultantStatus = false
      board
-
-
-
+ 
   }
 
   override def placeHorizontalBlock(board: Array[Array[String]]): Any = {
