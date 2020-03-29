@@ -192,38 +192,37 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     if (resultantStatus == true) return resultObject
     resultantStatus = false
 
+//Step 3
+    resultObject =  placeHorizontalBlock(board)
+    if (resultantStatus == true) return resultObject
+    resultantStatus = false
+
+
+
+    resultObject =  placeVerticalBlock(board, 0, 0)
+    if (resultantStatus == true) return resultObject
+    resultantStatus = false
+
+
+
+    resultObject = playLeftRightDiagonalBlock(board)
+    if (resultantStatus == true) return resultObject
+    resultantStatus = false
+
+
+
+    resultObject =  playRightLeftDiagonalBlock(board)
+    if (resultantStatus == true) return resultObject
+    resultantStatus = false
+
+
 
 
     /*
 
-    {
-
-    }
-
-
 
     {
 
-      resultObject =  placeHorizontalBlock(board).asInstanceOf[Array[Any]]
-      board =  resultObject(1).asInstanceOf[Array[Array[String]]]
-      if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
-
-
-      resultObject =  placeVerticalBlock(board, 0, 0).asInstanceOf[Array[Any]]
-      board =  resultObject(1).asInstanceOf[Array[Array[String]]]
-      if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
-
-
-
-      resultObject = playLeftRightDiagonalBlock(board).asInstanceOf[Array[Any]]
-      board =  resultObject(1).asInstanceOf[Array[Array[String]]]
-      if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
-
-
-
-      resultObject =  playRightLeftDiagonalBlock(board).asInstanceOf[Array[Any]]
-      board =  resultObject(1).asInstanceOf[Array[Array[String]]]
-      if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
 
 
       //play  the next second match
@@ -559,7 +558,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     }
     resultantStatus = false
      board
- 
+
   }
 
   override def placeHorizontalBlock(board: Array[Array[String]]): Any = {
