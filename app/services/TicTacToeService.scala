@@ -273,7 +273,8 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
     if (move_x == 3) return player2
 
-    if (unMatched > 0) board else draw
+    if (unMatched > 0)    board
+    else draw
   }
 
 
