@@ -184,9 +184,10 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     resultantStatus = false
 
 
-    resultObject = playLeftRightDiagonalWin(board).asInstanceOf[Array[Any]]
-    board = resultObject(1).asInstanceOf[Array[Array[String]]]
-    if (resultObject(0).asInstanceOf[Boolean] == true) return board
+    resultObject = playLeftRightDiagonalWin(board)
+    if (resultantStatus == true) return resultObject
+    resultantStatus = false
+
 
     resultObject = playRightLeftDiagonalWin(board).asInstanceOf[Array[Any]];
     board = resultObject(1).asInstanceOf[Array[Array[String]]]
@@ -482,7 +483,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   override def playLeftRightDiagonalWin(board: Array[Array[String]]): Array[Array[String]] = {
 
-    val result: Array[Any] = null
+
 
     var unmatched = 0
     var move_o = 0
