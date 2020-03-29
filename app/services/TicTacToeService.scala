@@ -439,7 +439,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
       i += 1
     }
 
-    resultantStatus = true
+    resultantStatus = false
     board
 
   }
