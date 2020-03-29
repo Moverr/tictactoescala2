@@ -28,7 +28,7 @@ trait ITicTacToeService {
   def validateBoardString(board: String): Array[String]
 
   //todo: THis function has a board array and a callback
-  def placeHorizontalWin(board: Array[Array[String]]): Any
+  def placeHorizontalWin(board: Array[Array[String]]):Array[Array[String]]
 
   def placeVerticalWin(board: Array[Array[String]], columnIndex: Int, unMatched: Int): Any
 
@@ -141,6 +141,8 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     board
   }
 
+  var resultantStatus:Boolean = false
+
   override def playGame(boardString: String): Array[Array[String]] = {
     var board: Array[Array[String]] = null
 
@@ -148,6 +150,8 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     validateBoardString(boardString);
     board = if (boardString.isEmpty()) populateBoard("    o    ") else populateBoard(boardString)
 
+
+//    Step 1
 
     var result: Any = null
 
@@ -162,44 +166,40 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     if (result.equals(player1) || result.equals(player2)) return board
 
 
-    /*
-
     result = findRightLeftDiagonalMatch(board)
     if(result.equals(player1) || result.equals(player2)) return board
-    */
 
-    {
 
-      /*
-      result = findLeftRightDiagonalMatch(board)
+//    Step 2
 
-      if(result.equals(player1) || result.equals(player2)) return board
+    var resultObject:Array[Any] = null;
+    resultObject  = placeHorizontalWin(board).asInstanceOf[Array[Any]]
+    if(resultantStatus == true) return board
 
-      result = findRightLeftDiagonalMatch(board)
+    resultantStatus = false
 
-      if(result.equals(player1) || result.equals(player2)) return board  */
 
-    }
+    board =  resultObject(1).asInstanceOf[Array[Array[String]]]
+    if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
+
+    resultObject = placeVerticalWin(board,0,0).asInstanceOf[Array[Any]]
+    board =  resultObject(1).asInstanceOf[Array[Array[String]]]
+    if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
+
+    resultObject = playLeftRightDiagonalWin(board).asInstanceOf[Array[Any]]
+    board =  resultObject(1).asInstanceOf[Array[Array[String]]]
+    if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
+
+    resultObject =  playRightLeftDiagonalWin(board).asInstanceOf[Array[Any]];
+    board =  resultObject(1).asInstanceOf[Array[Array[String]]]
+    if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
+
+
 
 
     /*
-    var resultObject:Array[Any] = null;
+
     {
-      resultObject  = placeHorizontalWin(board).asInstanceOf[Array[Any]]
-      board =  resultObject(1).asInstanceOf[Array[Array[String]]]
-      if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
-
-      resultObject = placeVerticalWin(board,0,0).asInstanceOf[Array[Any]]
-      board =  resultObject(1).asInstanceOf[Array[Array[String]]]
-      if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
-
-      resultObject = playLeftRightDiagonalWin(board).asInstanceOf[Array[Any]]
-      board =  resultObject(1).asInstanceOf[Array[Array[String]]]
-      if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
-
-      resultObject =  playRightLeftDiagonalWin(board).asInstanceOf[Array[Any]];
-      board =  resultObject(1).asInstanceOf[Array[Array[String]]]
-      if(resultObject(0).asInstanceOf[Boolean]== true)   return  board
 
     }
 
@@ -402,9 +402,8 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   }
 
-  override def placeHorizontalWin(board: Array[Array[String]]): Any = {
+  override def placeHorizontalWin(board: Array[Array[String]]): Array[Array[String]] = {
 
-    val result: Array[Any] = null
     var boardRow: Array[String] = null
 
     var i: Int = 0;
@@ -417,8 +416,8 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
       var j = 0
       while (j < boardRow.length) {
 
-        if (boardRow(j) eq player1) move_o += 1
-        else if (boardRow(j) eq player2) move_x += 1
+        if (boardRow(j) == player1) move_o += 1
+        else if (boardRow(j) == player2) move_x += 1
         else unmatched += 1
 
         j += 1
@@ -429,24 +428,20 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
         while (j < boardRow.length) {
           if (boardRow(j) == initSymbol) {
             boardRow(j) = player1
-            result(0) = true;
-            result(1) = board;
-
-            return result;
+            board(i) = boardRow
+            resultantStatus = true
+             return  board
           }
 
           j += 1
         }
       }
-
-
       i += 1
     }
 
-    result(0) = false;
-    result(1) = board;
+    resultantStatus = true
+    board
 
-    result
   }
 
   override def placeVerticalWin(board: Array[Array[String]], columnIndex: Int, unMatched: Int): Any = {
