@@ -470,10 +470,10 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     }
     else {
       val column_Index = columnIndex + 1
-      return placeVerticalWin(board, column_Index, un_matched)
+        placeVerticalWin(board, column_Index, un_matched)
 
     }
- 
+
   }
 
   override def playLeftRightDiagonalWin(board: Array[Array[String]]): Array[Array[String]] = {
