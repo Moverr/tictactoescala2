@@ -603,7 +603,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
   }
 
-  override def placeVerticalBlock(board: Array[Array[String]], columnIndex: Int, unMatched: Int): Any = {
+  override def placeVerticalBlock(board: Array[Array[String]], columnIndex: Int, unMatched: Int): Array[Array[String]] = {
     val result: Array[Any] = null
 
     var move_o = 0
@@ -629,9 +629,10 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
         if (boardRow(columnIndex) == initSymbol) {
           boardRow(columnIndex) = player1
           board(i) = boardRow
-          result(0) = true
-          result(1) = board
-          return result
+
+          resultantStatus = true
+          return  board
+
 
         }
 
@@ -645,9 +646,10 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
       return placeVerticalWin(board, column_index, un_matched)
     }
 
-    result(0) = true
-    result(1) = board
-    result
+    resultantStatus = false
+    board
+
+
 
 
   }
