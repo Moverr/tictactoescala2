@@ -254,14 +254,9 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
       val boardRow = board(i)
       var j: Int = 0;
       while (j < boardRow.length) {
-        if (boardRow(j).equals(player1)) {
-          move_o += 1
-        }
-        else if (boardRow(j).equals(player2)) {
-          move_x += 1
-        } else {
-          unMatched += unMatched;
-        }
+        if (boardRow(j).equals(player1)) move_o += 1
+        else if (boardRow(j).equals(player2)) move_x += 1
+        else unMatched += 1;
         j += 1
       }
 
@@ -269,11 +264,9 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     }
 
 
-    if (move_o == 3) return player1
-
-    if (move_x == 3) return player2
-
-    if (unMatched > 0)    board
+    if (move_o == 3) player1
+    else if (move_x == 3) player2
+    else if (unMatched > 0) board
     else draw
   }
 
