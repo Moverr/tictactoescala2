@@ -112,7 +112,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
   //populate Board
   override def populateBoard(moves: String): Array[Array[String]] = {
 
-    val movesArray: Array[String] = if (moves.isEmpty()) "    o    ".split("") else moves.split("")
+    val movesArray: Array[String] = if (moves.isEmpty()) "++++o++++".split("") else moves.split("")
 
     val board: Array[Array[String]] = new Array[Array[String]](3);
 
@@ -144,15 +144,9 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
     // 1) if empty string  or undefined meaning, the computer is playing first
     validateBoardString(boardString)
-    board = if (boardString.isEmpty()) populateBoard("    o    ") else populateBoard(boardString)
-
-    //    board = populateBoard("    o    ")
-    //    board = populateBoard(boardString)
-
-    //todo: find if I started the first move
+    board =  populateBoard(boardString)
 
     //    Step 1
-
     var result: Any = null
 
     result = findHorizontalMatch(board)
@@ -214,7 +208,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     resultantStatus = false
 
     // Level 3
-    //   board =  playNextMove(board)
+       board =  playNextMove(board)
 
     board
 
