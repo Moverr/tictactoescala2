@@ -105,7 +105,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
     val result: Array[Array[String]] = playGame(boardString)
     val response: String = populateResponse(result)
     println(response)
-    val boardJson = Json.toJson(boardString)
+    val boardJson = Json.toJson(response)
     boardJson
   }
 
@@ -256,7 +256,7 @@ class TicTacToeService(val board: String) extends ITicTacToeService {
 
     for (index <- 0 until(boardArray.length - 1, 1)) {
       val character = boardArray(index)
-      if (!character.equalsIgnoreCase(player1) && !character.equalsIgnoreCase(player2) && !character.equalsIgnoreCase(initSymbol)) throw new RuntimeException("Invalid Character, not acceptable ")
+     // if (!character.equalsIgnoreCase(player1) && !character.equalsIgnoreCase(player2) && !character.equalsIgnoreCase(initSymbol)) throw new RuntimeException("Invalid Character, not acceptable ")
     }
     boardArray
   }
