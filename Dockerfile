@@ -1,4 +1,4 @@
-FROM java:7
+FROM java:8
 
 ENV PLAY_VERSION 2.2.6
 
