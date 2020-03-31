@@ -32,7 +32,8 @@ class TicTacToeController  @Inject()(cc:ControllerComponents) extends  AbstractC
 
   def index(board:String ) =Action{
     try{
-      val result = new TicTacToeService(board).initGame(board);
+      val tictactoeService = new TicTacToeService(board)
+      val result = tictactoeService initGame(board);
       Ok((result));
     }catch {
       case err:RuntimeException=> BadRequest(Json.obj("status" -> "ERROR", "message" ->  err.getMessage))
